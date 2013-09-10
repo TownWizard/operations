@@ -38,34 +38,42 @@ if(isset($_REQUEST))
 						 
 							}
 							else // if url found in database
-							{	//echo "HTTP/1.0 400 Invalid parameter - Site URL exists";
-								header("HTTP/1.0 400 Invalid parameter - Site URL exists");
+							{	
+								$msg="Site URL exists";
+								send_error_email($msg);
+								header("HTTP/1.0 400 Invalid parameter - ".$msg."");
 								exit;
 							}
 					  }
 					  else // if ID and Token are not active
 					 {	
-						header("HTTP/1.0 401 Your ID and Token are not active currently");
+						$msg="Your ID and Token are not active currently";
+						send_error_email($msg);
+						header("HTTP/1.0 401 ".$msg."");
 				 		exit;
 					 }
 			}
 			else // if ID and Token are not in database
 			{ 	
-				header("HTTP/1.0 401 You have entered wrong Access Id or Token");
+				$msg="You have entered wrong Access Id or Token";
+				send_error_email($msg);
+				header("HTTP/1.0 401 ".$msg."");
 		 		exit;
 			}
 	
    	 }
 	 else // if($postcheck) fails
 	{
-		//echo "HTTP/1.0 400 Invalid parameter - ".$msg."";
+		send_error_email($msg);
 		header("HTTP/1.0 400 Invalid parameter - ".$msg."");
 		exit;
 	}
 }
 else // if(isset($_REQUEST)) fails
-{
-		header("HTTP/1.0 400 REQUEST missing");
+{		
+		$msg="REQUEST missing";
+		send_error_email($msg);
+		header("HTTP/1.0 400 ".$msg."");
 		exit;
 }
 
@@ -75,27 +83,27 @@ function checkPostParameter($postValue){
 global $msg;
 
 	if(!ctype_digit($postValue['id'])){
-		$msg="Access ID<br/>";
+		$msg="Access ID";
 		return false;
 	}
 	
 	if(empty($postValue['token'])){
-		$msg="Token empty<br/>";
+		$msg="Token empty";
 		return false;
 	}
 	
 	if(empty($postValue['guideinternalurl'])){
-		$msg="Internal site name empty<br/>";
+		$msg="Internal site name empty";
 		return false;
 	}
 	
 	if(!filter_var($postValue['email'], FILTER_VALIDATE_EMAIL)){
-		$msg="Email address format wrong<br/>";
+		$msg="Email address format wrong";
 		return false;
 	}
 	
 	if(!ctype_alnum($postValue['guidezipcode'])){ 
-		$msg="Location code is not alphanumeric<br/>";
+		$msg="Location code is not alphanumeric";
 		return false;
 	}
 	
@@ -103,7 +111,7 @@ global $msg;
 	{
 		if(strtolower($postValue['dunit'])!='km')
 		{ 
-			$msg="Distance unit should be 'KM' or 'Miles' !<br/>";
+			$msg="Distance unit should be 'KM' or 'Miles' ";
 			return false;
 		}
 	}
@@ -112,7 +120,7 @@ global $msg;
 	{ 
 		if(strtolower($postValue['wunit'])!='c')
 		{ 		
-			$msg="Weather unit should be 'f' for farenhit or 'c' for celsius!<br/>";
+			$msg="Weather unit should be 'f' for farenhit or 'c' for celsius";
 			return false;
 		}
 	}
@@ -121,7 +129,7 @@ global $msg;
 	{ 
 		if(strtolower($postValue['dformat'])!='ddmm')
 		{ 		
-			$msg="Date format should be 'mmdd' or 'ddmm'!<br/>";
+			$msg="Date format should be 'mmdd' or 'ddmm'";
 			return false;
 		}
 	}
@@ -130,13 +138,13 @@ global $msg;
 	{ 
 		if($postValue['tformat']!='24')
 		{ 		
-			$msg="Time format should be '12' or '24'!<br/>";
+			$msg="Time format should be '12' or '24'";
 			return false;
 		}
 	}
 	
 	if(!ctype_alpha($postValue['language'])){
-		$msg="Language should be alphabetic letter<br/>";
+		$msg="Language should be alphabetic letter";
 		return false;
 	}
 
@@ -229,12 +237,16 @@ function internalSiteCreationSteps()
 						fclose($fh);
 					}
 					else{ // can't write images/phocagallery/.htaccess file
-						header("HTTP/1.0 500 Can't open .htaccess file");
+						$msg="Internal server error - can't write .htaccess file";
+						send_error_email($msg);
+						header("HTTP/1.0 500 ".$msg."");
 		 				exit;
 					}
 				}
 				else{ // path:partner/[guideinternalurl]/images/phocagallery
-						header("HTTP/1.0 500 Can't open .htaccess file");
+						$msg="Internal server error - can't open .htaccess file";
+						send_error_email($msg);
+						header("HTTP/1.0 500 ".$msg."");
 		 				exit;
 				}
 				
@@ -265,11 +277,15 @@ function internalSiteCreationSteps()
 								fclose($fh);
 							}
 							else{ // can't write images/phocagallery/image_uploader/.htaccess file
-								header("HTTP/1.0 500 Can't open .htaccess file");
+								$msg="Internal server error - can't write .htaccess file";
+								send_error_email($msg);
+								header("HTTP/1.0 500 ".$msg."");
 				 				exit;
 							}
 						}
 						else{ // path:partner/[guideinternalurl]/images/image_uploader
+							$msg="Internal server error - can't open .htaccess file";
+							send_error_email($msg);
 							header("HTTP/1.0 500 Can't open .htaccess file");
 			 				exit;
 						}
@@ -282,19 +298,24 @@ function internalSiteCreationSteps()
 						}
 						else{
 							//echo "HTTP/1.0 500 Internal server error - could not change path to /twweb/operations";
+							$msg="Internal server error - could not change path to /twweb/operations";
+							send_error_email($msg);
 							header("HTTP/1.0 500 Internal server error - could not change path to /twweb/operations");
 					 		exit;
 						}
 				}
 				else{ // Internal server error - could not change path to parnter/images/phocagallery/image_uploader";
-					
-					header("HTTP/1.0 500 Internal server error - could not change path to parnter/images/phocagallery/image_uploader");
-			 		exit;
+					$msg="Internal server error - could not change path to parnter/images/phocagallery/image_uploader";
+					send_error_email($msg);
+					header("HTTP/1.0 500 Internal server error - ".$msg."");
+					exit;
 				}
 			}
 			else{ //Internal server error - could not change path to parnter/images/phocagallery";
 				
-				header("HTTP/1.0 500 Internal server error - could not change path to parnter/images/phocagallery");
+				$msg="Internal server error - could not change path to parnter/images/phocagallery";
+				send_error_email($msg);
+				header("HTTP/1.0 500 Internal server error - ".$msg."");
 		 		exit;
 			}
 				
@@ -502,10 +523,38 @@ function databaseInsertsteps(){
 		mysql_query("insert into master(mid,site_url,db_name,db_user,db_password,tpl_folder_name,tpl_menu_folder_name,style_folder_name,partner_folder_name) values('','".$_REQUEST[guideinternalurl].".townwizard.com','".$new_db_name."','root','bitnami','default".strtolower($_REQUEST[language])."','default".strtolower($_REQUEST[language])."','v3','".$_REQUEST[guideinternalurl]."')");
 	}
 	
-	//echo "HTTP/1.0 200 ok - Internal site created successfully";
-	header("HTTP/1.0 200 ok - Internal site created successfully");
-	$_REQUEST="";
+	$msg="Internal site created successfully";
+	send_success_email($msg);
+	header("HTTP/1.0 200 ok - ".$msg."");
 	exit;
+}
+
+function send_error_email($msg)
+{
+	$to = "operations@townwizard.com". ", ";
+	$to .= "support@townwizard.com";
+	$subject = "".$_REQUEST['guideinternalurl']. "-internal site creation failed";
+	$message = "<div>".$msg." for guide ".$_REQUEST['guideinternalurl']."<br/><br/>Thanks!</div>";
+	$from = "Townwizard-Operations";
+	$headers = 'MIME-Version: 1.0' . "\r\n";
+	$headers .= 'Content-type:text/html;charset=iso-8859-1' . "\r\n";
+	$headers .= "From:" . $from;
+	mail($to,$subject,$message,$headers);
+	return TRUE;
+}
+
+function send_success_email($msg)
+{
+	$to = "operations@townwizard.com". ", ";
+	$to .= "support@townwizard.com";
+	$subject = "".$_REQUEST['guideinternalurl']. "-internal site creation succeed";
+	$message = "<div>".$msg." for guide ".$_REQUEST['guideinternalurl']."<br/><br/>Thanks!</div>";
+	$from = "Townwizard-Operations";
+	$headers = 'MIME-Version: 1.0' . "\r\n";
+	$headers .= 'Content-type:text/html;charset=iso-8859-1' . "\r\n";	
+	$headers .= "From:" . $from;
+	mail($to,$subject,$message,$headers);
+	return TRUE;
 }
 
 // Getting latitude and longitude from zip code

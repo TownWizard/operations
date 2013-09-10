@@ -44,14 +44,16 @@ if(isset($_REQUEST))
 							}
 							else // if no internal url found in database
 							{
-								
+								$msg="Internal site not exists";
+								send_error_email($msg);
 								header("HTTP/1.0 400 Invalid parameter - Internal site not exists");
 								exit;
 							}
 						}
 						else // if external url found in database
 						{
-							
+							$msg="External site exists";
+							send_error_email($msg);
 							header("HTTP/1.0 400 Invalid parameter - External site exists");
 							exit;
 						}
@@ -59,29 +61,33 @@ if(isset($_REQUEST))
 				  }
 				  else // if ID and Token are not active
 				 {	
-					
-					header("HTTP/1.0 401 Your ID and Token are not active currently");
+					$msg="Your ID and Token are not active currently";
+					send_error_email($msg);
+					header("HTTP/1.0 401 ".$msg."");
 			 		exit;
 				 }
 			}
 			else // if ID and Token are not in database
 			{ 
-				
-				header("HTTP/1.0 401 You have entered wrong Access Id or Token");
+				$msg="You have entered wrong Access Id or Token";
+				send_error_email($msg);
+				header("HTTP/1.0 401 ".$msg."");
 		 		exit;
 			}
 	
    	 }
 	 else //if postcheck fails
 	{
-		
+		send_error_email($msg);
 		header("HTTP/1.0 400 Invalid parameter - ".$msg."");
 		exit;
 	}
 }
 else // if(isset($_REQUEST)) fails
 {
-		header("HTTP/1.0 400 REQUEST missing");
+		$msg="REQUEST missing";
+		send_error_email($msg);
+		header("HTTP/1.0 400 ".$msg."");
 		exit;
 }
 
@@ -120,10 +126,42 @@ function externalSiteCreationSteps($internal_url){
 	//Insert External URL in our master table
 	mysql_query("insert into master(mid,site_url,db_name,db_user,db_password,tpl_folder_name,tpl_menu_folder_name,style_folder_name,partner_folder_name) values('','".strtolower($_REQUEST['guideexternalurl'])."','$output[2]','root','bitnami','$output[5]','$output[6]','v3','$output[8]')");
 								
-	
-	$_REQUEST="";
+	$msg="External site created successfully";
+	send_success_email($msg);
 	header("HTTP/1.0 200 ok - External site created successfully");
 	exit;
+}
+
+function send_error_email($msg)
+{
+	$url = explode(".", $_REQUEST['guideexternalurl']);
+	$final_url=$url[0].'-dot-'.$url[1];
+	$to = "operations@townwizard.com". ", ";
+	$to .= "support@townwizard.com";
+	$subject = "".$final_url. "-external site creation failed";
+	$message = "<div>".$msg." for guide ".$final_url."<br/><br/>Thanks!</div>";
+	$from = "Townwizard-Operations";
+	$headers = 'MIME-Version: 1.0' . "\r\n";
+	$headers .= 'Content-type:text/html;charset=iso-8859-1' . "\r\n";
+	$headers .= "From:" . $from;
+	mail($to,$subject,$message,$headers);
+	return TRUE;
+}
+
+function send_success_email($msg)
+{
+	$url = explode(".", $_REQUEST['guideexternalurl']);
+	$final_url=$url[0].'-dot-'.$url[1];
+	$to = "operations@townwizard.com". ", ";
+	$to .= "support@townwizard.com";
+	$subject = "".$final_url. "-external site creation succeed";
+	$message = "<div>".$msg." for guide ".$final_url."<br/><br/>Thanks!</div>";
+	$from = "Townwizard-Operations";
+	$headers = 'MIME-Version: 1.0' . "\r\n";
+	$headers .= 'Content-type:text/html;charset=iso-8859-1' . "\r\n";	
+	$headers .= "From:" . $from;
+	mail($to,$subject,$message,$headers);
+	return TRUE;
 }
 
 ?>
