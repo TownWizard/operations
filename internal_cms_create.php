@@ -1,6 +1,6 @@
 <?php 
 global $msg,$twwebroot;
-$twwebroot='/twdbweb';
+$twwebroot='/twweb';
 
 if(isset($_REQUEST))
 {
