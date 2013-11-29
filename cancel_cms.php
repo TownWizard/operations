@@ -10,14 +10,36 @@ if(isset($_REQUEST))
 	// if postcheck is false return 400 with the message and if true then proceed ahead
 	if($postcheck)
 	{	
-			//Connecting with Mysql Server
-			mysql_connect('localhost', 'root','bitnami');
+			//connecting to mysql
+			$link = mysql_connect('localhost', 'root', 'bitnami');
+			
+			# Condition to check, if server connection succesfully established or not.
+			if (!$link){
+				$msg="Could not connect Mysql";
+				send_error_email($msg);
+				header("HTTP/1.0 402 Could not connect Mysql - ".$msg."");
+				exit;
+			}
 
 			//selecting master database
-			mysql_select_db("master");
+			$select_db1 = mysql_select_db("master");
+			
+			if (!$select_db1){
+				$msg="Could not select database master";
+				send_error_email($msg);
+				header("HTTP/1.0 400 Could not select database - ".$msg."");
+		 		exit;
+			}
 
 			$id_res = mysql_query("select * from api_caller where id=".$_REQUEST['id']."");
-
+			
+			if (!$id_res){
+				$msg="Could not found result from api_caller";
+				send_error_email($msg);
+				header("HTTP/1.0 400 Could not found result from api_caller - ".$msg."");
+		 		exit;
+			}
+			
 			$output = mysql_fetch_row($id_res);
 
 			//Checking ID and Token in database
@@ -119,7 +141,14 @@ function basedOnInternalSite(){
 				{
 					
 					//Update internal and other external URLS in our master table
-					mysql_query("update master SET site_url='TBD-".$ext_output[0]."',db_name='TBD-".$ext_output[1]."' where site_url='".$ext_output[0]."'");							
+					$query_output1 = mysql_query("update master SET site_url='TBD-".$ext_output[0]."',db_name='TBD-".$ext_output[1]."' where site_url='".$ext_output[0]."'");
+						
+					if (!$query_output1){
+						$msg="Could not update master table for cancellation";
+						send_error_email($msg);
+						header("HTTP/1.0 400 Could not update master table for cancellation - ".$msg."");
+						exit;
+					}
 				
 				}
 				
@@ -158,7 +187,14 @@ function basedOnExternalSite(){
 				while($int_output=mysql_fetch_array($int_url))
 				{
 					//Update internal and other external URL in our master table
-					mysql_query("update master SET site_url='TBD-".$int_output[0]."',db_name='TBD-".$int_output[1]."' where site_url='".$int_output[0]."'");							
+					$query_output2 = mysql_query("update master SET site_url='TBD-".$int_output[0]."',db_name='TBD-".$int_output[1]."' where site_url='".$int_output[0]."'");
+
+					if (!$query_output2){
+						$msg="Could not update master table for cancellation";
+						send_error_email($msg);
+						header("HTTP/1.0 400 Could not update master table for cancellation - ".$msg."");
+						exit;
+					}					
 				}
 				$msg = "CMS cancelled successfully";
 				send_success_email($msg);

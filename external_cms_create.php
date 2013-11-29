@@ -10,13 +10,35 @@ if(isset($_REQUEST))
 	// if postcheck is false return 400 with the message and if true then proceed ahead
 	if($postcheck)
 	{	
-			//Connecting with Mysql Server
-			mysql_connect('localhost', 'root','bitnami');
+			//connecting to mysql
+			$link = mysql_connect('localhost', 'root', 'bitnami');
+			
+			# Condition to check, if server connection succesfully established or not.
+			if (!$link){
+				$msg="Could not connect Mysql";
+				send_error_email($msg);
+				header("HTTP/1.0 402 Could not connect Mysql - ".$msg."");
+				exit;
+			}
 
 			//selecting master database
-			mysql_select_db("master");
+			$select_db1 = mysql_select_db("master");
+			
+			if (!$select_db1){
+				$msg="Could not select database master";
+				send_error_email($msg);
+				header("HTTP/1.0 400 Could not select database - ".$msg."");
+		 		exit;
+			}
 
 			$id_res = mysql_query("select * from api_caller where id=".$_REQUEST['id']."");
+			
+			if (!$id_res){
+				$msg="Could not found result from api_caller";
+				send_error_email($msg);
+				header("HTTP/1.0 400 Could not found result from api_caller - ".$msg."");
+		 		exit;
+			}
 
 			$output = mysql_fetch_row($id_res);
 
@@ -124,7 +146,14 @@ function externalSiteCreationSteps($internal_url){
 	$output = mysql_fetch_row($internal_url);
 	
 	//Insert External URL in our master table
-	mysql_query("insert into master(mid,site_url,db_name,db_user,db_password,tpl_folder_name,tpl_menu_folder_name,style_folder_name,partner_folder_name) values('','".strtolower($_REQUEST['guideexternalurl'])."','$output[2]','root','bitnami','$output[5]','$output[6]','v3','$output[8]')");
+	$query_output1 = mysql_query("insert into master(mid,site_url,db_name,db_user,db_password,tpl_folder_name,tpl_menu_folder_name,style_folder_name,partner_folder_name) values('','".strtolower($_REQUEST['guideexternalurl'])."','$output[2]','root','bitnami','$output[5]','$output[6]','v3','$output[8]')");
+	
+	if (!$query_output1){
+		$msg="Could not insert into master table";
+		send_error_email($msg);
+		header("HTTP/1.0 400 Could not insert into master table - ".$msg."");
+ 		exit;
+	}
 								
 	$msg="External site created successfully";
 	send_success_email($msg);

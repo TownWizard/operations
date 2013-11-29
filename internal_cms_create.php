@@ -1,6 +1,7 @@
 <?php 
-global $msg,$twwebroot;
+global $msg,$twwebroot,$twwebtmp;
 $twwebroot='/twweb';
+$twwebtmp='/twweb/tmp';
 
 if(isset($_REQUEST))
 {
@@ -11,12 +12,34 @@ if(isset($_REQUEST))
 	if($postcheck)
 	{
 			//Connecting with Mysql Server
-			mysql_connect('localhost', 'root','bitnami');
+			$link1 = mysql_connect('localhost', 'root','bitnami');
 
+			# Condition to check, if server connection succesfully established or not.
+			if (!$link1){
+				$msg="Could not connect Mysql";
+				send_error_email($msg);
+				header("HTTP/1.0 402 Could not connect Mysql - ".$msg."");
+		 		exit;
+			}
+		
 			//selecting master database
-			mysql_select_db("master");
+			$select_db1 = mysql_select_db("master");
+			
+			if (!$select_db1){
+				$msg="Could not select database master";
+				send_error_email($msg);
+				header("HTTP/1.0 400 Could not select database - ".$msg."");
+		 		exit;
+			}
 
 			$id_res = mysql_query("select * from api_caller where id=".$_REQUEST['id']."");
+			
+			if (!$id_res){
+				$msg="Could not found result from api_caller";
+				send_error_email($msg);
+				header("HTTP/1.0 400 Could not found result from api_caller - ".$msg."");
+		 		exit;
+			}
 
 			$output = mysql_fetch_row($id_res);
 
@@ -182,16 +205,27 @@ function internalSiteCreationSteps()
 			else{
 				$_REQUEST['dformat'] = '%d/%m';
 			}
-			
-			// remove previous database backup of particular languge
-			// and then export database of particular language
-			if($_REQUEST[language] == 'english')
+			global $twwebtmp;
+			// Changing directory to twweb/tmp 
+			if(chdir($twwebtmp))
 			{
-				shell_exec('rm masterdefaultv3.sql');
-				shell_exec('mysqldump -u root -pbitnami masterdefaultv3 > masterdefaultv3.sql'); 
-			}else{
-				shell_exec('rm masterdefault'.strtolower($_REQUEST[language]).'v3.sql');
-				shell_exec('mysqldump -u root -pbitnami masterdefault'.strtolower($_REQUEST[language]).'v3 > masterdefault'.strtolower($_REQUEST[language]).'v3.sql');  
+				// remove previous database backup of particular languge
+				// and then export database of particular language
+				if($_REQUEST[language] == 'english')
+				{
+					shell_exec('rm masterdefaultv3.sql');
+					shell_exec('mysqldump -u root -pbitnami masterdefaultv3 > masterdefaultv3.sql'); 
+				}else{
+					shell_exec('rm masterdefault'.strtolower($_REQUEST[language]).'v3.sql');
+					shell_exec('mysqldump -u root -pbitnami masterdefault'.strtolower($_REQUEST[language]).'v3 > masterdefault'.strtolower($_REQUEST[language]).'v3.sql');  
+				}
+			}
+			else{ //Internal server error - could not change path to twweb/tmp";
+				
+				$msg="Internal server error - could not change path to root/tmp";
+				send_error_email($msg);
+				header("HTTP/1.0 500 Internal server error - ".$msg."");
+		 		exit;
 			}
 			
 			global $msg,$twwebroot;
@@ -289,18 +323,19 @@ function internalSiteCreationSteps()
 							header("HTTP/1.0 500 Can't open .htaccess file");
 			 				exit;
 						}
-					
-						// Changing directory to /twweb/operations
-						if(chdir(''.$twwebroot.'/operations'))
+						
+						global $twwebtmp;
+						// Changing directory to root/tmp
+						if(chdir($twwebtmp))
 						{
 								//calling function for database related updates
 								databaseInsertSteps();
 						}
 						else{
-							//echo "HTTP/1.0 500 Internal server error - could not change path to /twweb/operations";
-							$msg="Internal server error - could not change path to /twweb/operations";
+							//echo "HTTP/1.0 500 Internal server error - could not change path to root/tmp";
+							$msg="Internal server error - could not change path to root/tmp";
 							send_error_email($msg);
-							header("HTTP/1.0 500 Internal server error - could not change path to /twweb/operations");
+							header("HTTP/1.0 500 Internal server error - ".$msg."");
 					 		exit;
 						}
 				}
@@ -327,14 +362,36 @@ function internalSiteCreationSteps()
 function databaseInsertsteps(){
 	
 	//connecting to mysql
-	mysql_connect('localhost', 'root', 'bitnami');
+	$link = mysql_connect('localhost', 'root', 'bitnami');
+	
+	# Condition to check, if server connection succesfully established or not.
+	if (!$link){
+		$msg="Could not connect Mysql";
+		send_error_email($msg);
+		header("HTTP/1.0 402 Could not connect Mysql - ".$msg."");
+ 		exit;
+	}
 				
 	//creating new database of new partner
 	$new_db_name = str_replace( array( '-', '.','!','>','<','#'),'',strtolower($_REQUEST['guideinternalurl']));
-	mysql_query('create database '.$new_db_name.'');
-				
+	
+	$create_db = mysql_query("create database `".$new_db_name."`");
+		
+	if (!$create_db){
+		$msg="Could not create database `".$new_db_name."`";
+		send_error_email($msg);
+		header("HTTP/1.0 400 Could not create database - ".$msg."");
+ 		exit;
+	}		
 	//selecting new parnter database
-	mysql_select_db($new_db_name);
+	$select_db = mysql_select_db($new_db_name);
+	
+	if (!$select_db){
+		$msg="Could not select database `".$new_db_name."`";
+		send_error_email($msg);
+		header("HTTP/1.0 400 Could not select database - ".$msg."");
+ 		exit;
+	}
 						       
 	//Import database into partner's database
 	if($_REQUEST[language] == 'english')
@@ -346,10 +403,17 @@ function databaseInsertsteps(){
 	}
 				
 	//updating page global table
-	mysql_query("UPDATE jos_pageglobal SET site_name ='".ucfirst($_REQUEST[guideinternalurl])."', email ='".$_REQUEST[email]."', googgle_map_api_keys ='', location_code ='".$_REQUEST[guidezipcode]."', beach ='".ucfirst($_REQUEST[guideinternalurl])."', photo_mini_slider_cat ='Events', photo_upload_cat ='Events', facebook ='', iphone ='http://itunes.apple.com/us/app/townwizard/id507216232?mt=8&uo=4', android ='', Header_color='#00BAE8', distance_unit ='".$_REQUEST[dunit]."', weather_unit ='".$_REQUEST[wunit]."', twitter ='',date_format ='".$_REQUEST[dformat]."',time_format ='".$_REQUEST[tformat]."', youtube ='',time_zone ='".$_REQUEST[timezone]."' WHERE id='1'");	
-			
+	$query_output1 = mysql_query("UPDATE jos_pageglobal SET site_name ='".ucfirst($_REQUEST[guideinternalurl])."', email ='".$_REQUEST[email]."', googgle_map_api_keys ='', location_code ='".$_REQUEST[guidezipcode]."', beach ='".ucfirst($_REQUEST[guideinternalurl])."', photo_mini_slider_cat ='Events', photo_upload_cat ='Events', facebook ='', iphone ='http://itunes.apple.com/us/app/townwizard/id507216232?mt=8&uo=4', android ='', Header_color='#00BAE8', distance_unit ='".$_REQUEST[dunit]."', weather_unit ='".$_REQUEST[wunit]."', twitter ='',date_format ='".$_REQUEST[dformat]."',time_format ='".$_REQUEST[tformat]."', youtube ='',time_zone ='".$_REQUEST[timezone]."' WHERE id='1'");	
+		
+	if (!$query_output1){
+		$msg="Could not update jos_pageglobal table of database `".$new_db_name."`";
+		send_error_email($msg);
+		header("HTTP/1.0 400 Could not update jos_pageglobal table of database - ".$msg."");
+ 		exit;
+	}
+		
 	//updating com-shines parameters
-	mysql_query("UPDATE jos_components SET `params`= 'phocaimagecat=1 
+	$query_output2 = mysql_query("UPDATE jos_components SET `params`= 'phocaimagecat=1 
 				phocavideocat=2 
 				phocauser=65 
 				todayarticle= 
@@ -359,11 +423,18 @@ function databaseInsertsteps(){
 				email=".$_REQUEST[email]."' 
 				WHERE `jos_components`.`id` =41");
 
+	if (!$query_output2){
+		$msg="Could not update com_shines table of database `".$new_db_name."`";
+		send_error_email($msg);
+		header("HTTP/1.0 400 Could not update com_shines table of database - ".$msg."");
+ 		exit;
+	}
+	
 	//calling for function for getting longitude and latitude
 	$val = getLnt($_REQUEST[guidezipcode]);
 		 	
 	//updating jevlocation parameters
-	mysql_query("UPDATE jos_components SET `params` = 'loc_own=19
+	$query_output3 = mysql_query("UPDATE jos_components SET `params` = 'loc_own=19
 				max_art=5
 				loc_global=19
 				selectfromall=0
@@ -424,8 +495,15 @@ function databaseInsertsteps(){
 				modlatest_SortReverse=0'
 				WHERE `jos_components`.`id` =43");										
 
+	if (!$query_output3){
+		$msg="Could not update jos_jev_location table of database `".$new_db_name."`";
+		send_error_email($msg);
+		header("HTTP/1.0 400 Could not update jos_jev_location table of database - ".$msg."");
+ 		exit;
+	}
+	
 	//Changing partner folder name for media manager
-	mysql_query("UPDATE jos_components SET `params`= 'upload_extensions=bmp,csv,doc,epg,gif,ico,jpg,odg,odp,ods,odt,pdf,png,ppt,swf,txt,xcf,xls,BMP,CSV,DOC,EPG,GIF,ICO,JPG,ODG,ODP,ODS,ODT,PDF,PNG,PPT,SWF,TXT,XCF,XLS,zip
+	$query_output4 = mysql_query("UPDATE jos_components SET `params`= 'upload_extensions=bmp,csv,doc,epg,gif,ico,jpg,odg,odp,ods,odt,pdf,png,ppt,swf,txt,xcf,xls,BMP,CSV,DOC,EPG,GIF,ICO,JPG,ODG,ODP,ODS,ODT,PDF,PNG,PPT,SWF,TXT,XCF,XLS,zip
 				upload_maxsize=10000000
 				file_path=partner/".$_REQUEST[guideinternalurl]."/images
 				image_path=partner/".$_REQUEST[guideinternalurl]."/images/stories
@@ -439,11 +517,26 @@ function databaseInsertsteps(){
 				enable_flash=0' 
 				WHERE `jos_components`.`id` =19");
 
+	if (!$query_output4){
+		$msg="Could not update media manager table of database `".$new_db_name."`";
+		send_error_email($msg);
+		header("HTTP/1.0 400 Could not update media manager table of database - ".$msg."");
+ 		exit;
+	}
+	
 	//Updating rsform table for changing email id
-	mysql_query("UPDATE jos_rsform_forms SET AdminEmailTo='".$_REQUEST[email]."'");
+	$query_output5 = mysql_query("UPDATE jos_rsform_forms SET AdminEmailTo='".$_REQUEST[email]."'");
 
+
+	if (!$query_output5){
+		$msg="Could not update jos_rsforms table of database `".$new_db_name."`";
+		send_error_email($msg);
+		header("HTTP/1.0 400 Could not update jos_rsforms table of database - ".$msg."");
+ 		exit;
+	}
+	
 	//updating partner folder name in JCE Editor
-	mysql_query("UPDATE jos_jce_groups SET `params`= 'editor_width=
+	$query_output6 = mysql_query("UPDATE jos_jce_groups SET `params`= 'editor_width=
 				editor_height=
 				editor_theme_advanced_toolbar_location=top
 				editor_theme_advanced_toolbar_align=center
@@ -507,20 +600,55 @@ function databaseInsertsteps(){
 				spellchecker_pspellshell_aspell=/usr/bin/aspell
 				spellchecker_pspellshell_tmp=/tmp' 
 				WHERE name ='All Users'");
+				
+	if (!$query_output6){
+		$msg="Could not update jce editor table of database `".$new_db_name."`";
+		send_error_email($msg);
+		header("HTTP/1.0 400 Could not update jce editor table of database - ".$msg."");
+ 		exit;
+	}
 
 	//Updating email and pass for admin user
-	mysql_query("UPDATE jos_users SET email='".$_REQUEST[email]."',password='".md5($_REQUEST[guideinternalurl].'123')."' WHERE id=62");
+	$query_output7 = mysql_query("UPDATE jos_users SET email='".$_REQUEST[email]."',password='".md5($_REQUEST[guideinternalurl].'123')."' WHERE id=62");
+	
+	if (!$query_output7){
+		$msg="Could not update user table of database `".$new_db_name."`";
+		send_error_email($msg);
+		header("HTTP/1.0 400 Could not update user table of database - ".$msg."");
+ 		exit;
+	}
 
 	//selecting master db
-	mysql_select_db("master");
+	$selct_master = mysql_select_db("master");
+	
+	if (!$selct_master){
+		$msg="Could not select master database";
+		send_error_email($msg);
+		header("HTTP/1.0 400 Could not select master database - ".$msg."");
+ 		exit;
+	}
 
 	//Insert new partner in our master table
 	if($_REQUEST[language] == 'english')
 	{
-		mysql_query("insert into master(mid,site_url,db_name,db_user,db_password,tpl_folder_name,tpl_menu_folder_name,style_folder_name,partner_folder_name) values('','".$_REQUEST[guideinternalurl].".townwizard.com','".$new_db_name."','root','bitnami','default','default','v3','".$_REQUEST[guideinternalurl]."')");
+		$insert_for_eng = mysql_query("insert into master(mid,site_url,db_name,db_user,db_password,tpl_folder_name,tpl_menu_folder_name,style_folder_name,partner_folder_name) values('','".$_REQUEST[guideinternalurl].".townwizard.com','".$new_db_name."','root','bitnami','default','default','v3','".$_REQUEST[guideinternalurl]."')");
+		
+		if (!$insert_for_eng){
+			$msg="Could not insert into master table";
+			send_error_email($msg);
+			header("HTTP/1.0 400 Could not insert into master table - ".$msg."");
+	 		exit;
+		}
 	}
 	else{
-		mysql_query("insert into master(mid,site_url,db_name,db_user,db_password,tpl_folder_name,tpl_menu_folder_name,style_folder_name,partner_folder_name) values('','".$_REQUEST[guideinternalurl].".townwizard.com','".$new_db_name."','root','bitnami','default".strtolower($_REQUEST[language])."','default".strtolower($_REQUEST[language])."','v3','".$_REQUEST[guideinternalurl]."')");
+		$insert_for_other = mysql_query("insert into master(mid,site_url,db_name,db_user,db_password,tpl_folder_name,tpl_menu_folder_name,style_folder_name,partner_folder_name) values('','".$_REQUEST[guideinternalurl].".townwizard.com','".$new_db_name."','root','bitnami','default".strtolower($_REQUEST[language])."','default".strtolower($_REQUEST[language])."','v3','".$_REQUEST[guideinternalurl]."')");
+		
+		if (!$insert_for_other){
+			$msg="Could not insert into master table";
+			send_error_email($msg);
+			header("HTTP/1.0 400 Could not insert into master table - ".$msg."");
+	 		exit;
+		}
 	}
 	
 	$msg="Internal site created successfully";
