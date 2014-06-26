@@ -1,11 +1,13 @@
 <?php 
 global $msg,$twwebroot,$twwebtmp;
 $twwebroot='/twweb';
-$twwebtmp='/twweb/tmp';
+$twwebtmp='/twweb/tmp'; 
+
+
 
 if(isset($_REQUEST))
 {
-	//Calling Function for Validation
+	//Calling Function for Validation 
 	$postcheck = checkPostParameter($_REQUEST);
 	
 	//if true then proceed ahead and if postcheck is false return 400 with the message
@@ -13,7 +15,7 @@ if(isset($_REQUEST))
 	{
 			//Connecting with Mysql Server
 			$link1 = mysql_connect('localhost', 'root','bitnami');
-
+			
 			# Condition to check, if server connection succesfully established or not.
 			if (!$link1){
 				$msg="Could not connect Mysql";
@@ -178,10 +180,11 @@ global $msg;
 function internalSiteCreationSteps()
 {
 			// adjusting parameter for database
-			$_REQUEST['wunit']               = strtolower($_REQUEST['wunit']);
+			$_REQUEST['wunit']             = strtolower($_REQUEST['wunit']);
 			$_REQUEST['dformat']           = strtolower($_REQUEST['dformat']);
 			$_REQUEST['language']          = strtolower($_REQUEST['language']);
-	
+			
+			
 			if($_REQUEST['dunit']=='miles')
 			{
 				$_REQUEST['dunit'] = ucfirst($_REQUEST['dunit']);
@@ -214,11 +217,17 @@ function internalSiteCreationSteps()
 				if($_REQUEST[language] == 'english')
 				{
 					shell_exec('rm masterdefaultv3.sql');
-					shell_exec('mysqldump -u root -pbitnami masterdefaultv3 > masterdefaultv3.sql'); 
+					$res = shell_exec('mysqldump -u root -pbitnami masterdefaultv3 > masterdefaultv3.sql');
+					//$res = shell_exec('mysqldump -u root -pbitnami masterdefaultv3 > masterdefaultv3.sql');
+					//$rep = exec('mysqldump -u root -pbitnami masterdefaultv3 > masterdefaultv3.sql',$response);
+					//print $rep;
+					//print_r($response);
+					
 				}else{
 					shell_exec('rm masterdefault'.strtolower($_REQUEST[language]).'v3.sql');
 					shell_exec('mysqldump -u root -pbitnami masterdefault'.strtolower($_REQUEST[language]).'v3 > masterdefault'.strtolower($_REQUEST[language]).'v3.sql');  
 				}
+				
 			}
 			else{ //Internal server error - could not change path to twweb/tmp";
 				
@@ -231,7 +240,7 @@ function internalSiteCreationSteps()
 			global $msg,$twwebroot;
 			//copy masterdefaultv3 images to new partner
 			shell_exec('cp -r '.$twwebroot.'/v3/partner/masterdefaultv3 '.$twwebroot.'/v3/partner/'.$_REQUEST[guideinternalurl].'');
-	
+			
 			
 			// Changing directory to images/phocagallery
 			if(chdir(''.$twwebroot.'/v3/partner/'.$_REQUEST[guideinternalurl].'/images/phocagallery'))
@@ -608,9 +617,14 @@ function databaseInsertsteps(){
  		exit;
 	}
 
-	//Updating email and pass for admin user
-	$query_output7 = mysql_query("UPDATE jos_users SET email='".$_REQUEST[email]."',password='".md5($_REQUEST[guideinternalurl].'123')."' WHERE id=62");
-	
+        //Updating email and pass for admin user
+        if(isset($_REQUEST['password']) AND $_REQUEST['password']!=''){
+            $password = $_REQUEST['password'];
+            $query_output7 = mysql_query("UPDATE jos_users SET `username` = '".$_REQUEST[email]."',email='".$_REQUEST[email]."',password='".md5($password)."' WHERE id=62");
+        }else{
+            $query_output7 = mysql_query("UPDATE jos_users SET `username` = '".$_REQUEST[email]."',email='".$_REQUEST[email]."',password='".md5($_REQUEST[guideinternalurl].'123')."' WHERE id=62");
+        }
+        
 	if (!$query_output7){
 		$msg="Could not update user table of database `".$new_db_name."`";
 		send_error_email($msg);
@@ -631,18 +645,25 @@ function databaseInsertsteps(){
 	//Insert new partner in our master table
 	if($_REQUEST[language] == 'english')
 	{
-		$insert_for_eng = mysql_query("insert into master(mid,site_url,db_name,db_user,db_password,tpl_folder_name,tpl_menu_folder_name,style_folder_name,partner_folder_name) values('','".$_REQUEST[guideinternalurl].".townwizard.com','".$new_db_name."','root','bitnami','default','default','v3','".$_REQUEST[guideinternalurl]."')");
-		
+		if($_REQUEST['id']=='2'){
+			$insert_for_eng = mysql_query("insert into master(mid,site_url,db_name,db_user,db_password,tpl_folder_name,partner_type,style_folder_name,partner_folder_name) values('','".$_REQUEST[guideinternalurl].".townwizard.com','".$new_db_name."','root','bitnami','default','free','v3','".$_REQUEST[guideinternalurl]."')");
+		}else{
+			$insert_for_eng = mysql_query("insert into master(mid,site_url,db_name,db_user,db_password,tpl_folder_name,partner_type,style_folder_name,partner_folder_name) values('','".$_REQUEST[guideinternalurl].".townwizard.com','".$new_db_name."','root','bitnami','default','paid','v3','".$_REQUEST[guideinternalurl]."')");
+		}
 		if (!$insert_for_eng){
 			$msg="Could not insert into master table";
 			send_error_email($msg);
 			header("HTTP/1.0 400 Could not insert into master table - ".$msg."");
-	 		exit;
+			exit;
 		}
+		
 	}
 	else{
-		$insert_for_other = mysql_query("insert into master(mid,site_url,db_name,db_user,db_password,tpl_folder_name,tpl_menu_folder_name,style_folder_name,partner_folder_name) values('','".$_REQUEST[guideinternalurl].".townwizard.com','".$new_db_name."','root','bitnami','default".strtolower($_REQUEST[language])."','default".strtolower($_REQUEST[language])."','v3','".$_REQUEST[guideinternalurl]."')");
-		
+		if($_REQUEST['id']=='2'){
+			$insert_for_other = mysql_query("insert into master(mid,site_url,db_name,db_user,db_password,tpl_folder_name,partner_type,style_folder_name,partner_folder_name) values('','".$_REQUEST[guideinternalurl].".townwizard.com','".$new_db_name."','root','bitnami','default".strtolower($_REQUEST[language])."','free','v3','".$_REQUEST[guideinternalurl]."')");
+		}else{
+			$insert_for_other = mysql_query("insert into master(mid,site_url,db_name,db_user,db_password,tpl_folder_name,partner_type,style_folder_name,partner_folder_name) values('','".$_REQUEST[guideinternalurl].".townwizard.com','".$new_db_name."','root','bitnami','default".strtolower($_REQUEST[language])."','paid','v3','".$_REQUEST[guideinternalurl]."')");
+		}
 		if (!$insert_for_other){
 			$msg="Could not insert into master table";
 			send_error_email($msg);
@@ -653,12 +674,37 @@ function databaseInsertsteps(){
 	
 	$msg="Internal site created successfully";
 	send_success_email($msg);
-	header("HTTP/1.0 200 ok - ".$msg."");
-	exit;
+        if($_REQUEST['id']=='2'){
+            $updateuser="UPDATE user_signup SET signup_type = '0', user_status = '1' WHERE id = '".$_REQUEST['userid']."' ";
+                
+            $result = mysql_query($updateuser);
+	
+            // Send the email:
+            $twadminemail = $_REQUEST['email'];
+
+            $message.= " Guide Name : ".$_REQUEST['guideinternalurl']."\n";
+            $message.= " Guide URL : ".$_REQUEST['guideinternalurl'].".townwizard.com/administrator\n";
+            $message.= " Password : ".$_REQUEST['password']."\n";
+
+
+            $finalmail = mail($twadminemail, 'New Guide Registration Confirmation', $message, 'From: info@townwizard.com');
+
+            if($finalmail){
+                    // Confirmation
+                    $_REQUEST[] = "";
+                    echo '<div style="border: 1px solid;margin: 0 auto;padding: 10px 60px;background-repeat: no-repeat;background-position: 10px center;text-align: left;width: 531px;color: #4F8A10;background-color: #DFF2BF;font-size: 170%;">Thank you for registering! Your Guide credentials will be sent to you soon</div>';
+            }else{
+                    echo '<div class="errormsgbox">You could not be registered due to a mail error.</div>';
+            }
+        }else{        
+            header("HTTP/1.0 200 ok - ".$msg."");
+            exit;
+        }
 }
 
 function send_error_email($msg)
 {
+	echo $msg;
 	$to = "operations@townwizard.com". ", ";
 	$to .= "support@townwizard.com";
 	$subject = "".$_REQUEST['guideinternalurl']. "-internal site creation failed";
@@ -673,6 +719,7 @@ function send_error_email($msg)
 
 function send_success_email($msg)
 {
+	echo $msg;
 	$to = "operations@townwizard.com". ", ";
 	$to .= "support@townwizard.com";
 	$subject = "".$_REQUEST['guideinternalurl']. "-internal site creation succeed";
