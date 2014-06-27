@@ -674,37 +674,12 @@ function databaseInsertsteps(){
 	
 	$msg="Internal site created successfully";
 	send_success_email($msg);
-        if($_REQUEST['id']=='2'){
-            $updateuser="UPDATE user_signup SET signup_type = '0', user_status = '1' WHERE id = '".$_REQUEST['userid']."' ";
-                
-            $result = mysql_query($updateuser);
-	
-            // Send the email:
-            $twadminemail = $_REQUEST['email'];
-
-            $message.= " Guide Name : ".$_REQUEST['guideinternalurl']."\n";
-            $message.= " Guide URL : ".$_REQUEST['guideinternalurl'].".townwizard.com/administrator\n";
-            $message.= " Password : ".$_REQUEST['password']."\n";
-
-
-            $finalmail = mail($twadminemail, 'New Guide Registration Confirmation', $message, 'From: info@townwizard.com');
-
-            if($finalmail){
-                    // Confirmation
-                    $_REQUEST[] = "";
-                    echo '<div style="border: 1px solid;margin: 0 auto;padding: 10px 60px;background-repeat: no-repeat;background-position: 10px center;text-align: left;width: 531px;color: #4F8A10;background-color: #DFF2BF;font-size: 170%;">Thank you for registering! Your Guide credentials will be sent to you soon</div>';
-            }else{
-                    echo '<div class="errormsgbox">You could not be registered due to a mail error.</div>';
-            }
-        }else{        
-            header("HTTP/1.0 200 ok - ".$msg."");
-            exit;
-        }
+    header("HTTP/1.0 200 ok - ".$msg."");
+    exit;
 }
 
 function send_error_email($msg)
 {
-	echo $msg;
 	$to = "operations@townwizard.com". ", ";
 	$to .= "support@townwizard.com";
 	$subject = "".$_REQUEST['guideinternalurl']. "-internal site creation failed";
@@ -719,7 +694,6 @@ function send_error_email($msg)
 
 function send_success_email($msg)
 {
-	echo $msg;
 	$to = "operations@townwizard.com". ", ";
 	$to .= "support@townwizard.com";
 	$subject = "".$_REQUEST['guideinternalurl']. "-internal site creation succeed";
