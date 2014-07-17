@@ -185,7 +185,7 @@ function internalSiteCreationSteps()
 			$_REQUEST['language']          = strtolower($_REQUEST['language']);
 			
 			
-			if($_REQUEST['dunit']=='miles')
+			if($_REQUEST['dunit']=='Miles')
 			{
 				$_REQUEST['dunit'] = ucfirst($_REQUEST['dunit']);
 			}
@@ -660,9 +660,9 @@ function databaseInsertsteps(){
 	}
 	else{
 		if($_REQUEST['id']=='2'){
-			$insert_for_other = mysql_query("insert into master(mid,site_url,db_name,db_user,db_password,tpl_folder_name,partner_type,style_folder_name,partner_folder_name) values('','".$_REQUEST[guideinternalurl].".townwizard.com','".$new_db_name."','root','bitnami','default".strtolower($_REQUEST[language])."','free','v3','".$_REQUEST[guideinternalurl]."')");
+			$insert_for_other = mysql_query("insert into master(mid,site_url,db_name,db_user,db_password,tpl_folder_name,partner_type,style_folder_name,partner_folder_name) values('','".$_REQUEST[guideinternalurl].".townwizard.com','".$new_db_name."','root','bitnami','default','free','v3','".$_REQUEST[guideinternalurl]."')");
 		}else{
-			$insert_for_other = mysql_query("insert into master(mid,site_url,db_name,db_user,db_password,tpl_folder_name,partner_type,style_folder_name,partner_folder_name) values('','".$_REQUEST[guideinternalurl].".townwizard.com','".$new_db_name."','root','bitnami','default".strtolower($_REQUEST[language])."','paid','v3','".$_REQUEST[guideinternalurl]."')");
+			$insert_for_other = mysql_query("insert into master(mid,site_url,db_name,db_user,db_password,tpl_folder_name,partner_type,style_folder_name,partner_folder_name) values('','".$_REQUEST[guideinternalurl].".townwizard.com','".$new_db_name."','root','bitnami','default','paid','v3','".$_REQUEST[guideinternalurl]."')");
 		}
 		if (!$insert_for_other){
 			$msg="Could not insert into master table";
