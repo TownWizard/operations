@@ -106,7 +106,7 @@ function insertProcess($data){
 				$var1 = "EMAIL VERIFICATION";
 				$headercode = mailheader($var1);
 				$footercode = mailfooter();
-				$link = "http://".$_SERVER[HTTP_HOST]."/free-next?key=" .$activation;
+				$link = $_REQUEST['url']."/free-next?key=" .$activation;
 
 				$message .= $headercode; 
 				$message .= '<tr><td>&nbsp;</td><td><p style="font:22px Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:bold;margin:0px 0 0 0;padding:0;color:#000;">Congratulations</p><p style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:20px 0 5px 0;padding:0;">Thanks for signing up for your free local guide from TownWizard! Click the email verification link below to complete the guide setup process.</p></td><td>&nbsp;</td></tr>';
@@ -177,7 +177,7 @@ function updateProcess($did){
 				$var1 = "EMAIL VARIFICATION";
 				$headercode = mailheader($var1);
 				$footercode = mailfooter();
-				$link = "http://".$_SERVER[HTTP_HOST]."/free-next?key=" .$activation;
+				$link = $_REQUEST['url']."/free-next?key=" .$activation;
 
 				$message .= $headercode;
 				$message .= '<tr><td>&nbsp;</td><td><p style="font:22px Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:bold;margin:0px 0 0 0;padding:0;color:#000;">Congratulations</p><p style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:20px 0 5px 0;padding:0;">Thanks for signing up for your free local guide from TownWizard! Click the email verification link below to complete the guide setup process.</p></td><td>&nbsp;</td></tr>';
