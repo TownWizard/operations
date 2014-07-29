@@ -216,7 +216,7 @@
 
 		<label for="captcha">Add captcha word:</label>
 		<input type="text" name="captcha" id="captcha-form" placeholder="captcha" autocomplete="off" required oninvalid="setCustomValidity('Please enter valid captcha')" onchange="try{setCustomValidity('')}catch(e){}" /><br/>
-		<input type="hidden" value="<?php echo $url; ?>" name="url" />
+		<input type="hidden" value="<?php echo dirname($_SERVER['HTTP_REFERER']; ?>" name="url" />
 		<input type="submit" name="submit" class="myButton" id="Signup" value="Signup"  />
 	</form>
 
