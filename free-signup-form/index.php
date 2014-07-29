@@ -119,7 +119,7 @@
 						//console.log(data);
 						//console.log(textStatus);
 					     if(data.status===100){
-						  	window.location.href = 'http://<?php echo $_SERVER['HTTP_HOST'];?>/form/thanks.html';
+						  	window.location.href = 'http://<?php echo $_SERVER['HTTP_HOST'];?>/thanks.html';
 							//$("#simple-msg").html('sucessfull.');
 							//$("#simple-msg").css('color','red');
 						}else if(data.status===101){
@@ -140,7 +140,7 @@
 							$("#gname").css('box-shadow','none');	
 						}else if(data.status===103){
 							//console.log('else'); 
-							window.location.href = 'http://<?php echo $_SERVER['HTTP_HOST'];?>/form/thanks.html';						
+							window.location.href = 'http://<?php echo $_SERVER['HTTP_HOST'];?>/thanks.html';						
 						}else if(data.status===104){
 							//console.log('else'); 
 							$("#simple-msg").html('This Guide name is already registered in last 24 hours.');
