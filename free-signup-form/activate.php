@@ -107,7 +107,7 @@ if (isset($_REQUEST['createguide'])) {
             $_REQUEST[] = "";
             $serverurl = $_SERVER["HTTP_HOST"];
 
-			header('Location:http://'.$serverurl.'/form/thanks2.html');
+			header('Location:http://free-signup.townwizard.com/thanks2.html');
 //exit;
         }else{
             echo '<div class="errormsgbox">You could not be registered due to error.Please contact at <b>support@townwizard.com</b></div><br/>';

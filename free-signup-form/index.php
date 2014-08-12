@@ -1,7 +1,8 @@
 <?php 
 	session_start(); 
 	$url = dirname($_SERVER['HTTP_REFERER']);
-
+	$internalurl = "free-signup.townwizard.com";
+	
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -49,8 +50,7 @@
 						this.lname.focus();
 						$('#contact').unbind('submit'); 
 						return false;
-					}
-					
+					}		
 					
 					if(guidename == "") { 
 						alert("Guide Name required. Blank spaces not allowed."); 
@@ -121,7 +121,7 @@
 						//console.log(data);
 						//console.log(textStatus);
 					     if(data.status===100){
-						  	window.location.href = 'http://<?php echo $_SERVER['HTTP_HOST'];?>/form/thanks.html';
+						  	window.location.href = 'http://<?php echo $internalurl;?>/thanks.html';
 							//$("#simple-msg").html('sucessfull.');
 							//$("#simple-msg").css('color','red');
 						}else if(data.status===101){
@@ -142,7 +142,7 @@
 							$("#gname").css('box-shadow','none');	
 						}else if(data.status===103){
 							//console.log('else'); 
-							window.location.href = 'http://<?php echo $_SERVER['HTTP_HOST'];?>/form/thanks.html';						
+							window.location.href = 'http://<?php echo $internalurl;?>/thanks.html';						
 						}else if(data.status===104){
 							//console.log('else'); 
 							$("#simple-msg").html('This Guide name is already registered in last 24 hours.');
