@@ -260,18 +260,30 @@ form#contact2 .placeholder {
 	color: #aaa;
 }
 
+form#contact p {
+    color: #666;
+    font-size: 13px;
+    margin-top: 10px;
+    text-align: left;
+  margin: 0px;
+}
+form#contact p a{
+    color: #d72128;
+    font-size: 13px;
+}
+
 .myButton {
 	background: #c00c13;
-    background-image: linear-gradient(to top, #c00c13 48%, #d72128 51%);
-    border: medium none;
-    border-radius: 4px;
-    box-shadow: 0 1px 2px 3px rgba(0, 0, 0, 0.25);
-    color: #fff;
-    display: inline-block;
-    font-size: 23px;
-    margin: 14px 0 0 148px;
-    padding: 7px 16px;
-    text-transform: uppercase;
+	background-image: linear-gradient(to top, #c00c13 48%, #d72128 51%);
+	border: medium none;
+	border-radius: 4px;
+	box-shadow: 0 1px 2px 3px rgba(0, 0, 0, 0.25);
+	color: #fff;
+	font-size: 23px;
+	padding: 7px 16px;
+	text-transform: capitalize;
+	width: 150px;
+	margin: 10px auto 5px;
 }
 
 .myButton:hover, .myButton:active {

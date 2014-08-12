@@ -36,7 +36,7 @@ if (isset($_REQUEST['createguide'])) {
 		$message .= '<tr><td>&nbsp;</td><td><p style="font:22px Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:bold;margin:0px 0 0 0;padding:0;color:#000;">Congratulations!</p><p style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:20px 0 5px 0;padding:0;">Your new local guide is ready! Check out the site  link and login information below.</p></td><td>&nbsp;</td></tr>';
 		$message .= '<tr><td height="100">&nbsp;</td>
 						<td> 
-							<table cellspacing="5"><tr><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:20px 0 5px 0;padding:0;" width="160" >Guide Name : </td><td>'.$_REQUEST['gname'].'</td></tr>
+							<table cellspacing="5"><tr><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:20px 0 5px 0;padding:0;" width="170" >Guide Name : </td><td>'.$_REQUEST['gname'].'</td></tr>
 							<tr><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:20px 0 5px 0;padding:0;">Guide Administration URL : </td><td><a style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#1a1a1a;text-decoration:none;" href="http://'.$_REQUEST['gname'].'.townwizard.com/administrator" target="_blank">http://'.$_REQUEST['gname'].'.townwizard.com/administrator</a></td></tr>
 							<tr><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:20px 0 5px 0;padding:0;">Username : </td><td><a style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#1a1a1a;text-decoration:none;" href="mailto:'.$_REQUEST['email'].'" >'.$_REQUEST['email'].'</a></td></tr>
 							<tr><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:20px 0 5px 0;padding:0;">Password : </td><td>(password that you specified)</td></tr></table>
@@ -107,7 +107,7 @@ if (isset($_REQUEST['createguide'])) {
             $_REQUEST[] = "";
             $serverurl = $_SERVER["HTTP_HOST"];
 
-			header('Location:http://'.$serverurl.'/thanks2.html');
+			header('Location:http://'.$serverurl.'/form/thanks2.html');
 //exit;
         }else{
             echo '<div class="errormsgbox">You could not be registered due to error.Please contact at <b>support@townwizard.com</b></div><br/>';

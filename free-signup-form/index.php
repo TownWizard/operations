@@ -1,5 +1,6 @@
 <?php 
 	session_start(); 
+	$url = dirname($_SERVER['HTTP_REFERER']);
 
 ?>
 <!DOCTYPE HTML>
@@ -120,7 +121,7 @@
 						//console.log(data);
 						//console.log(textStatus);
 					     if(data.status===100){
-						  	window.location.href = 'http://<?php echo $_SERVER['HTTP_HOST'];?>/thanks.html';
+						  	window.location.href = 'http://<?php echo $_SERVER['HTTP_HOST'];?>/form/thanks.html';
 							//$("#simple-msg").html('sucessfull.');
 							//$("#simple-msg").css('color','red');
 						}else if(data.status===101){
@@ -141,7 +142,7 @@
 							$("#gname").css('box-shadow','none');	
 						}else if(data.status===103){
 							//console.log('else'); 
-							window.location.href = 'http://<?php echo $_SERVER['HTTP_HOST'];?>/thanks.html';						
+							window.location.href = 'http://<?php echo $_SERVER['HTTP_HOST'];?>/form/thanks.html';						
 						}else if(data.status===104){
 							//console.log('else'); 
 							$("#simple-msg").html('This Guide name is already registered in last 24 hours.');
@@ -216,7 +217,11 @@
 
 		<label for="captcha">Add captcha word:</label>
 		<input type="text" name="captcha" id="captcha-form" placeholder="captcha" autocomplete="off" required oninvalid="setCustomValidity('Please enter valid captcha')" onchange="try{setCustomValidity('')}catch(e){}" /><br/>
-		<input type="hidden" value="<?php echo dirname($_SERVER['HTTP_REFERER']); ?>" name="url" />
+		<input type="hidden" value="<?php echo $url; ?>" name="url" />
+		
+		<p>By clicking below to sign up, you are agreeing to the TownWizard <a href="http://www.townwizard.com/free-license-agreement/" target="_blank" >License Agreement</a>.</p>
+		
+		
 		<input type="submit" name="submit" class="myButton" id="Signup" value="Signup"  />
 	</form>
 
