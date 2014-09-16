@@ -106,7 +106,90 @@ if (isset($_REQUEST['createguide'])) {
 
             $_REQUEST[] = "";
             $serverurl = $_SERVER["HTTP_HOST"];
+			
+			//Comment by Bhavan: Keep zoho code above email and send intmation in email for Zoho status, if error from zoho then add result from zoho (Error or success from zoho) show it in email for all the 3 modules)
+			########## Request For Zoho block START ##########
+			
+			$fname		 = $_REQUEST['fname'];
+			$lname		 = $_REQUEST['lname'];
+			$gEmail		 = $_REQUEST['email'];
+			$gSubject	 = $_REQUEST['gname'];
+			$gDate		 = $_REQUEST['date_format'];
+			$gZipcode	 = $_REQUEST['zip'];
+			$accountName = '<![CDATA['.$fname.' %26 '.$lname.' Co.]]>';
+			
+			# ***** ACCOUNT MODULE ***** CURL Process
+			setCurlParameter('Accounts');
+			$xml = '<Accounts><row no="1"><FL val="Account Name">'.$accountName.'</FL></row></Accounts>';
+			$query = 'newFormat=2&authtoken=fd05fe57d221aba08aa657f9699fa0ce&scope=crmapi&xmlData='.$xml;
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $query);// Set the request as a POST FIELD for curl.
+			$result = curl_exec($ch); // Execute cUrl session
+			curl_close($ch);
+			echo "<b>New Partner Account Added!</b><br>";
+			echo $result;
+			echo "<br><br>";
 
+			# ***** CONTACT MODULE ***** CURL Process 
+			setCurlParameter('Contacts');
+			$xml = '<Contacts><row no="1">
+			<FL val="First Name">'.$fname.'</FL>
+			<FL val="Last Name">'.$lname.'</FL>
+			<FL val="Email">'.$gEmail.'</FL>
+			<FL val="Guide Status">Not Terminated</FL>
+			<FL val="Account Name">'.$accountName.'</FL>
+			<FL val="Product">Free</FL>
+			</row></Contacts>';
+			$query = 'newFormat=2&authtoken=fd05fe57d221aba08aa657f9699fa0ce&scope=crmapi&xmlData='.$xml;
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $query);// Set the request as a POST FIELD for curl.
+			$result = curl_exec($ch); //Execute cUrl session
+			curl_close($ch);
+			echo "<b>New Contact Added!</b><br>";
+			echo $result;
+			echo "<br><br>";
+
+			# ***** SALES ORDERS MODULE ***** CURL Process 
+			setCurlParameter('SalesOrders');
+			$xml = '<SalesOrders><row no="1">
+			<FL val="Account Name">'.$accountName.'</FL>
+			<FL val="Product">Free</FL>
+			<FL val="Guide Deployment Status">CMS Ready</FL>
+			<FL val="Subject">'.$gSubject.'</FL>
+			<FL val="Guide Signup Date">'.$gDate.'</FL>
+			<FL val="Guide City Zip">'.$gZipcode.'</FL>
+			<FL val="Contact Name">'.$fname.' '.$lname.'</FL>
+			<FL val="Billing Status">Free</FL>
+			<FL val="Product Name"><![CDATA[Free %2D External Use]]></FL>
+			<FL val="Qty">1</FL>
+			<FL val="Unit Price">0</FL>
+			<FL val="List Price">0</FL>
+			</row></SalesOrders>';
+			$query = 'newFormat=2&authtoken=fd05fe57d221aba08aa657f9699fa0ce&scope=crmapi&xmlData='.$xml;
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $query);// Set the request as a POST FIELD for curl.
+			$result = curl_exec($ch); //Execute cUrl session
+			curl_close($ch);
+			echo "<b>New Partner Guide Added!<br></b>";
+			echo $result;
+			echo "<br><br>";
+
+
+			/**
+			* 
+			* @param Module Name to initiate CURL Process $module
+			* @param Value of module parameter $value
+			* 
+			*/
+			function setCurlParameter($module,$value = NULL){
+				global $ch;
+				$ch = curl_init('https://crm.zoho.com/crm/private/xml/'.$module.'/insertRecords?');
+				curl_setopt($ch, CURLOPT_VERBOSE, 1);//standard i/o streams
+				curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);// Turn off the server and peer verification
+				curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+				curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);//Set to return data to string ($response)
+				curl_setopt($ch, CURLOPT_POST, 1);//Regular post
+			}
+			########## Request For Zoho block END ##########
+			
+			
 			header('Location:http://free-signup.townwizard.com/thanks2.html');
 //exit;
         }else{
