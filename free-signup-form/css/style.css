@@ -31,7 +31,10 @@ a img { border: 0; }
 	content: ".";
 }
 
-p { line-height: 1.5; margin: 0 0 15px 0; }
+p { 
+	line-height: 1.5; 
+	margin: 0 0 15px 0; 
+}
 
 #simple-msg{
 	text-align: center;
@@ -42,11 +45,11 @@ GLOBAL
 
 html, body { 
 	margin: 0;
-    padding: 0;
- 	/*background-color: #f9f9f9;*/
-	font-family: Arial, Helvetica, sans-serif;
+	padding: 0;
+	/*background-color: #f9f9f9;*/
+	font-family: verdana;
 	font-size: 12px;
-	color: #000000;
+	color: #000;
 }
 
 /*-------------------------------------
@@ -54,11 +57,12 @@ HEADINGS
 ------------------------------------------*/
 
 h1 {
-	margin: 0 0 0.5em 0;
-	padding: 0;	
-	line-height: 1.5em;	
-	font-size: 14px;
-	color: #000000;
+	color: #d72128;
+	font-size: 26px;
+	font-weight: normal;
+	line-height: 30px;
+	margin: 0;
+	padding: 0;
 }
 
 h2 {
@@ -106,20 +110,28 @@ label.error {
     width: 262px;
 }
 #logo img{
-display: none;
+	display: none;
 }
 
 /*-------------------------------------
 FORM CORE
 ------------------------------------------*/
+#container {
+	background: none repeat scroll 0 0 #edeaea;
+	border-radius: 10px;
+	margin: 3% auto;
+	min-width: 773px;
+	padding: 15px 0;
+	text-align: center;
+	width: 773px;
+}
+form#contact {
 
-form#contact{
-	background: none repeat scroll 0 0 #FFFFFF;
-	border: 1px solid #CCC;
-	margin: auto;
-	padding: 10px;
-	width: 278px;
 	border-radius: 5px;
+	margin: auto;
+	padding: 10px 50px;
+	width: 72%;
+	overflow: hidden;
 }
 
 form#contact fieldset {
@@ -136,28 +148,42 @@ form#contact fieldset {
 	-webkit-box-shadow: 0px 2px 10px #d3d3d3; 
 	box-shadow: 0px 0px 10px #d3d3d3; 
 }
+#samplegname{
+  clear: both;
+  float: left;
+  text-align: left;
+  width: 100%;
+ margin-bottom: 6px;
+}
+.specialrow{
+	  float: left;
+  margin-bottom: 5px;
+  margin-right: 20px;
+  overflow: hidden;
+  padding: 5px;
+  width: 45%;
 
-form#contact input[type="text"], input[type="url"], input[type="number"],
-input[type="email"], input[type="tel"], textarea {
-	margin: 3px 0 0 0;
-	padding: 6px; 
-	width: 260px; 
-	font-family: arial, sans-serif; 
-	font-size: 12px; 
-	border: 1px solid #ccc;
-    background: -webkit-gradient(linear, left top, left 15, from(#FFFFFF), color-stop(4%, #f4f4f4), to(#FFFFFF));
-    background: -moz-linear-gradient(top, #FFFFFF, #f4f4f4 1px, #FFFFFF 15px);
+}
+.row {
+  float: left;
+  margin-bottom: 5px;
+  margin-right: 20px;
+  overflow: hidden;
+  padding: 5px;
+  width: 45%;
+}
+form#contact input[type="text"], input[type="url"], input[type="number"], input[type="password"], input[type="email"], input[type="tel"], select, textarea {
+  background: -moz-linear-gradient(center top , #ffffff, #f4f4f4 1px, #ffffff 15px) repeat scroll 0 0 rgba(0, 0, 0, 0);
+  border: 1px solid #ccc;
+  float: right;
+  font-size: 12px;
+  margin: 2px 0;
+  padding: 4px;
+  width: 179px;
 }
 
 form#contact select {
-	margin: 3px 0 0 0;
-	padding: 6px; 
-	width: 273px; 
-	font-family: arial, sans-serif; 
-	font-size: 12px; 
-	border: 1px solid #ccc;
-    background: -webkit-gradient(linear, left top, left 15, from(#FFFFFF), color-stop(4%, #f4f4f4), to(#FFFFFF));
-    background: -moz-linear-gradient(top, #FFFFFF, #f4f4f4 1px, #FFFFFF 15px);
+	width: 189px;
 }
 
 form#contact textarea {
@@ -166,12 +192,14 @@ form#contact textarea {
 }
 
 form#contact label {
-	display: block;
-	font-size: 13px;
-	color: #666;
-	margin-top: 10px;
-	font-weight: bold;
-	text-align: left;
+  display: block;
+  float: left;
+  font-size: 13px;
+  line-height: 17px;
+  margin: 2px 0;
+  padding: 4px 0;
+  text-align: left;
+  width: 89px;
 }
 
 form#contact label.error { 
@@ -211,16 +239,17 @@ form#contact2 fieldset {
 	box-shadow: 0px 0px 10px #d3d3d3; 
 }
 
-form#contact2 input[type="text"], input[type="url"], input[type="number"],
-input[type="email"], input[type="tel"], textarea, input[type="password"] {
-	margin: 3px 0 0 0;
-	padding: 6px; 
-	width: 260px; 
-	font-family: arial, sans-serif; 
-	font-size: 12px; 
-	border: 1px solid #ccc;
-    background: -webkit-gradient(linear, left top, left 15, from(#FFFFFF), color-stop(4%, #f4f4f4), to(#FFFFFF));
-    background: -moz-linear-gradient(top, #FFFFFF, #f4f4f4 1px, #FFFFFF 15px);
+#stage2{
+	background: url("../step2.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+	height: 22px;
+	margin: 5px auto;
+	width: 82px;
+}
+#stage3{
+	background: url("../step3.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+	height: 22px;
+	margin: 25px auto 5px;
+	width: 82px;
 }
 
 form#contact2 select {
@@ -230,8 +259,8 @@ form#contact2 select {
 	font-family: arial, sans-serif; 
 	font-size: 12px; 
 	border: 1px solid #ccc;
-    background: -webkit-gradient(linear, left top, left 15, from(#FFFFFF), color-stop(4%, #f4f4f4), to(#FFFFFF));
-    background: -moz-linear-gradient(top, #FFFFFF, #f4f4f4 1px, #FFFFFF 15px);
+	background: -webkit-gradient(linear, left top, left 15, from(#FFFFFF), color-stop(4%, #f4f4f4), to(#FFFFFF));
+	background: -moz-linear-gradient(top, #FFFFFF, #f4f4f4 1px, #FFFFFF 15px);
 }
 
 form#contact2 textarea {
@@ -261,48 +290,53 @@ form#contact2 .placeholder {
 }
 
 form#contact p {
-    color: #666;
-    font-size: 13px;
-    margin-top: 10px;
-    text-align: left;
-  margin: 0px;
+	clear: both;
+
+	font-size: 12px;
+	margin: 0;
+	text-align: left;
 }
 form#contact p a{
     color: #d72128;
-    font-size: 13px;
+    font-size: 12px;
 }
-
+form#contact {
+  border-radius: 5px;
+  clear: both;
+  margin: auto;
+  overflow: hidden;
+  padding: 10px 50px 0;
+  width: 80%;
+}
 .myButton {
-	background: #c00c13;
-	background-image: linear-gradient(to top, #c00c13 48%, #d72128 51%);
+	background: linear-gradient(to top, #c00c13 48%, #d72128 51%) repeat scroll 0 0 #c00c13;
 	border: medium none;
-	border-radius: 4px;
-	box-shadow: 0 1px 2px 3px rgba(0, 0, 0, 0.25);
 	color: #fff;
-	font-size: 23px;
-	padding: 7px 16px;
+	font-size: 18px;
+	margin: 5px auto 0px;
+	padding: 4px 7px;
 	text-transform: capitalize;
-	width: 150px;
-	margin: 10px auto 5px;
+	width: 148px;
+	float: right;
 }
 
 .myButton:hover, .myButton:active {
 	cursor: pointer;
 }
 
- .success {
-	border: 1px solid;
-	margin: 0 auto;
-	padding:10px 60px;
-	background-repeat: no-repeat;
-	background-position: 10px center;
-	text-align: left;
-	width: 492px;
-	color: #4F8A10;
-	background-color: #DFF2BF;
-	font-size: 135%;
-}
+.success {
+  background-position: 10px center;
+  background-repeat: no-repeat;
+  color: #333;
+  font-size: 140%;
+  margin: 10px auto;
+  padding: 10px 53px;
+  text-align: left;
 
+}
+strong{
+	color: #000;
+}
  .errormsgbox {
 	border: 1px solid;
 	margin: 0 auto;
@@ -343,14 +377,19 @@ input.disable{
 }
 
 input {
-  display: block;
-  margin-bottom: 10px;
+	display: block;
+	margin-bottom: 10px;
 }
 
 input:invalid:focus {
- outline: 2px solid rgba(200, 76, 76, 0.89);
+	outline: 2px solid rgba(200, 76, 76, 0.89);
 }
 
-.invalid input:required:invalid {
- outline: 2px solid rgba(200, 76, 76, 0.89);
+input:required:invalid {
+	outline: 2px solid rgba(200, 76, 76, 0.89);
 }
+
+#email {
+   background: #c9c9c9;
+    cursor: default;
+} 
