@@ -1,3 +1,7 @@
+@charset "UTF-8";
+/* Fonts */
+@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700);
 /*---------------------------------
 RESETS 
 ------------------------------------------*/
@@ -47,9 +51,9 @@ html, body {
 	margin: 0;
 	padding: 0;
 	/*background-color: #f9f9f9;*/
-	font-family: verdana;
+	font-family: "Open Sans",sans-serif;
 	font-size: 12px;
-	color: #000;
+	color: #3f3f3f;
 }
 
 /*-------------------------------------
@@ -57,31 +61,15 @@ HEADINGS
 ------------------------------------------*/
 
 h1 {
-	color: #d72128;
-	font-size: 26px;
-	font-weight: normal;
-	line-height: 30px;
-	margin: 0;
-	padding: 0;
+  color: #404141;
+  font-size: 30px;
+  font-weight: normal;
+  letter-spacing: 3px;
+  line-height: 30px;
+  margin: auto auto 25px;
+  padding: 0;
+  text-transform: uppercase;
 }
-
-h2 {
-	margin: 0 0 0.5em 0;
-	padding: 0;	
-	line-height: 1.5em;	
-	font-size: 12px;
-	color: #000000;
-}
-
-/*-------------------------------------
-LINKS
-------------------------------------------
-
-a:link { color: #06C; text-decoration: underline; }
-a:visited { color: #06C; text-decoration: underline; }
-a:hover { color: #06C; text-decoration: underline; }
-a:active { color: #06C; text-decoration: underline; }*/
-
 
 /*-------------------------------------
 LISTS
@@ -173,17 +161,20 @@ form#contact fieldset {
   width: 45%;
 }
 form#contact input[type="text"], input[type="url"], input[type="number"], input[type="password"], input[type="email"], input[type="tel"], select, textarea {
-  background: -moz-linear-gradient(center top , #ffffff, #f4f4f4 1px, #ffffff 15px) repeat scroll 0 0 rgba(0, 0, 0, 0);
-  border: 1px solid #ccc;
+  background: #fbfbfb;
+  border: medium none;
   float: right;
+ font-family: "Open Sans",sans-serif;
   font-size: 12px;
   margin: 2px 0;
   padding: 4px;
   width: 179px;
+ color: #999999;
 }
 
 form#contact select {
 	width: 189px;
+	color: #999999;
 }
 
 form#contact textarea {
@@ -200,6 +191,7 @@ form#contact label {
   padding: 4px 0;
   text-align: left;
   width: 89px;
+ font-family: "Montserrat",sans-serif;
 }
 
 form#contact label.error { 
@@ -309,19 +301,24 @@ form#contact {
   width: 80%;
 }
 .myButton {
-	background: linear-gradient(to top, #c00c13 48%, #d72128 51%) repeat scroll 0 0 #c00c13;
+	background: #f2333a;
 	border: medium none;
+	border-radius: 3px;
 	color: #fff;
-	font-size: 18px;
-	margin: 5px auto 0px;
-	padding: 4px 7px;
-	text-transform: capitalize;
-	width: 148px;
 	float: right;
+	font-family: Montserrat,sans-serif;
+	font-size: 18px;
+	margin: 2px;
+	padding: 2px 6px;
+	text-transform: uppercase;
+	transition: all 0.2s ease-out 0s;
+	width: 148px;
 }
 
 .myButton:hover, .myButton:active {
 	cursor: pointer;
+	background: #f7f7f7;
+	color: #f2333a;
 }
 
 .success {
@@ -331,7 +328,7 @@ form#contact {
   font-size: 140%;
   margin: 10px auto;
   padding: 10px 53px;
-  text-align: left;
+  text-align: justify;
 
 }
 strong{
@@ -393,3 +390,71 @@ input:required:invalid {
    background: #c9c9c9;
     cursor: default;
 } 
+@media only screen and (min-width:600px) and (max-width:799px){
+	h1{
+		font-size: 19px;
+	}
+	#container {
+		min-width: initial;
+		width: 90%;
+	}
+	form#contact input[type="text"], input[type="url"], input[type="number"], input[type="password"], input[type="email"], input[type="tel"], select, textarea {
+   		float: left;
+	}
+	.row,.specialrow {
+		margin-right: 0;
+		width: 47%;
+		padding: 5px;
+	}
+	#contact div:nth-of-type(14){
+		padding-top: 9px;
+	}
+	#captcha{
+		margin-left:0px !important;
+		margin-top: 12px;
+		width: 130px !important;
+	}
+
+}
+@media only screen and (min-width:240px) and (max-width:360px){
+	#container {
+		min-width: initial;
+		width: 90%;
+	}
+	h1{
+		font-size: 19px;
+	}
+	input[type="email"] {
+		float: none;
+		margin: 2px auto;
+		width: 250px;
+	}
+	.myButton {
+		float: none;
+		margin: 8px auto 2px auto;
+	}
+	form#contact {
+		padding: 2% 10%;
+		width: 80%;
+	}
+	.row,.specialrow {
+		margin: 0;
+		padding: 3px 0;
+		width: 90%;
+	}
+	
+	#contact div:nth-of-type(14){
+		padding-top: 12px;
+	}
+	#captcha{
+		margin-left:0px !important;
+		width: 130px !important;
+	}
+		form#contact input[type="text"], input[type="url"], input[type="number"], input[type="password"], input[type="email"], input[type="tel"], select, textarea {
+   		width: 95%;
+	}
+	form#contact select {
+	    width: 98%;
+	  color: #999999;
+	}
+}

@@ -9,7 +9,8 @@
 <head>
 	<link rel="stylesheet" href="css/style1.css">
 	<title>Initial Sign Up</title>
-	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width; initial-scale=1.0">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
 	<script type="text/javascript">
@@ -117,12 +118,12 @@
 </head>
 <body >
 <div id="container">
-	<h1>Create your town's 'Go-to' guide</h1>
+	<h1>Create your town's guide</h1>
 	<div id="stage1"></div>
-	<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+	<span>Create Your Community's #1 Mobile Guide Business.</span>
 	<form id="contact"  action="process.php" method="POST" class="validate-form">
 		<div id="simple-msg"></div>
-		<input type="email" name="email" id="email" placeholder="yourname@domain.com" required oninvalid="setCustomValidity('Valid email address required.')" onchange="try{setCustomValidity('')}catch(e){}" pattern="([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})" />
+		<input type="email" name="email" id="email" placeholder="Your email" required oninvalid="setCustomValidity('Valid email address required.')" onchange="try{setCustomValidity('')}catch(e){}" pattern="([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})" />
 		<input type="submit" name="submit" class="myButton" id="Signup" value="Signup"  />
 	</form>
 

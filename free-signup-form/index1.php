@@ -9,7 +9,8 @@
 <head>
 	<link rel="stylesheet" href="css/style.css">
 	<title>Initial Sign Up</title>
-	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width; initial-scale=1.0">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
 	<script type="text/javascript">
