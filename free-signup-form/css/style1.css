@@ -279,7 +279,8 @@ form#contact p a{
 }
 
 .myButton {
-	background: none repeat scroll 0 0 #f2333a;
+	background:#f2333a;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f2333a), color-stop(50%,#f2333a), color-stop(51%,#f2333a), color-stop(100%,#f2333a));
 	border: medium none;
 	border-radius: 3px;
 	color: #fff;
@@ -291,6 +292,7 @@ form#contact p a{
 	text-transform: uppercase;
 	transition: all 0.2s ease-out 0s;
 	width: 148px;
+	height: 28px;
 }
 
 .myButton:hover, .myButton:active {
@@ -370,6 +372,75 @@ input:invalid:focus {
 	#container {
 		min-width: initial;
 		width: 90%;
+	}
+}
+@media only screen and (min-width:480px) and (max-width:599px){
+	h1{
+		font-size: 19px;
+	}
+	#container {
+		min-width: initial;
+		width: 90%;
+	}
+	form#contact input[type="text"], input[type="url"], input[type="number"], input[type="password"], input[type="email"], input[type="tel"], select, textarea {
+   		float: left;
+		width: 60%;
+	}
+	form#contact select {
+	    width: 100%;
+	}
+	.row,.specialrow {
+		margin-right: 0;
+		width: 47%;
+		padding: 5px;
+	}
+	#contact div:nth-of-type(14){
+		padding-top: 9px;
+	}
+	.myButton {
+		width: 128px;
+	}
+}
+@media only screen and (min-width:361px) and (max-width:479px){
+	#container {
+		min-width: initial;
+		width: 90%;
+	}
+	h1{
+		font-size: 19px;
+	}
+	input[type="email"] {
+		float: none;
+		margin: 2px auto;
+		width: 250px;
+	}
+	.myButton {
+		float: none;
+		margin: 8px auto 2px auto;
+	}
+	form#contact {
+		padding: 2% 10%;
+		width: 80%;
+	}
+	.row,.specialrow {
+		margin: 0;
+		padding: 3px 0;
+		width: 90%;
+	}
+	
+	#contact div:nth-of-type(14){
+		padding-top: 12px;
+	}
+	#captcha{
+		margin-left:0px !important;
+		width: 130px !important;
+	}
+		form#contact input[type="text"], input[type="url"], input[type="number"], input[type="password"], input[type="email"], input[type="tel"], select, textarea {
+   		width: 95%;
+	}
+	form#contact select {
+	    width: 98%;
+	  color: #999999;
 	}
 }
 @media only screen and (min-width:240px) and (max-width:360px){
