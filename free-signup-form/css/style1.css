@@ -345,13 +345,13 @@ input.disable{
     border: 1px solid rgba(0, 0, 0, 0.25);
 }*/
 
-.invalid input:required:invalid {
+/*.invalid input:required:invalid {
     background: #BE4C54;
 }
 
 .invalid input:required:valid {
     background: #17D654 ;
-}
+}*/
 
 input {
   display: block;
@@ -359,11 +359,11 @@ input {
 }
 
 input:invalid:focus {
- outline: 2px solid rgba(200, 76, 76, 0.89);
+ /*outline: 2px solid rgba(200, 76, 76, 0.89);*/
 }
 
 .invalid input:required:invalid {
- outline: 2px solid rgba(200, 76, 76, 0.89);
+ /*outline: 2px solid rgba(200, 76, 76, 0.89);*/
 }
 @media only screen and (min-width:600px) and (max-width:799px){
 	h1{

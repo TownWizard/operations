@@ -65,6 +65,21 @@
 						}
 					}
 					
+					if(this.pass.value == "") { 
+						alert("Password required. It should be 5 to 15 charater long."); 
+						this.pass.focus(); 
+						$('#contact').unbind('submit');
+						return false; 
+					}else{
+						var count = $("#pass").val().length;
+						if(count < 5 || count > 15){
+							alert("Password required. It should be 5 to 15 charater long"); 
+							this.pass.focus(); 
+							$('#contact').unbind('submit');
+							return false;
+						}
+					}
+					
 					if(zip == "") { 
 						alert("zip required. Blank spaces not allowed."); 
 						this.zip.focus();
@@ -94,21 +109,6 @@
 							return false;
 						}
 					}	
-					
-					if(this.pass.value == "") { 
-						alert("Password required. It should be 5 to 15 charater long."); 
-						this.pass.focus(); 
-						$('#contact').unbind('submit');
-						return false; 
-					}else{
-						var count = $("#pass").val().length;
-						if(count < 5 || count > 15){
-							alert("Password required. It should be 5 to 15 charater long"); 
-							this.pass.focus(); 
-							$('#contact').unbind('submit');
-							return false;
-						}
-					}
 					
 					if(this.captcha.value == "") {
 						alert("Please enter valid captcha.."); 
