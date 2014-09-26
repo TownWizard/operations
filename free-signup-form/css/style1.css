@@ -211,14 +211,15 @@ form#contact2 fieldset {
 }
 
 input[type="email"] {
-background: none repeat scroll 0 0 #fbfbfb;
-border: medium none;
-float: left;
-font-family: "Montserrat",sans-serif;
-font-size: 18px;
-margin: 2px;
-padding: 3px 6px;
-width: 241px;
+	background: none repeat scroll 0 0 #fbfbfb;
+	border: medium none;
+	float: left;
+	font-family: "Montserrat",sans-serif;
+	font-size: 18px;
+	margin: 2px;
+	padding: 3px 6px;
+	width: 241px;
+	color: #000;
 }
 
 #stage1{
@@ -295,11 +296,12 @@ form#contact p a{
 	height: 28px;
 }
 
-.myButton:hover, .myButton:active {
+/*.myButton:hover{
 	cursor: pointer;
 	background: #f7f7f7;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f7f7f7), color-stop(50%,#f7f7f7), color-stop(51%,#f7f7f7), color-stop(100%,#f7f7f7));
 	color: #f2333a;
-}
+}*/
 
  .success {
 	border: 1px solid;
