@@ -174,7 +174,7 @@ form#contact input[type="text"], input[type="url"], input[type="number"], input[
 
 form#contact select {
 	width: 189px;
-	color: #999999;
+	color: #000000;
 }
 
 form#contact textarea {
