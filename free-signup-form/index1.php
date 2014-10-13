@@ -354,7 +354,7 @@ if (isset($email)){
 		
 		<input type="hidden" value="<?php echo $internalurl; ?>" name="url" />
 		
-		<p>By clicking below to sign up, you are agreeing to the TownWizard <a href="http://www.townwizard.com/free-license-agreement/" target="_blank" >License Agreement</a>.</p>
+		<p>By clicking below to sign up, you are agreeing to the TownWizard <a href="http://townwizard.com/responsive/license.html" target="_blank" >License Agreement</a>.</p>
 			
 			
 			<input type="submit" name="submit" class="myButton" id="Signup" value="Signup"  />

@@ -112,6 +112,12 @@ if (isset($key)){
 			$message2.= "<tr><td><b>Distance : </b></td><td>".$data['distance']."</td></tr>";
 			$message2.= "<tr><td><b>Time Zone : </b></td><td>".$data['timezone']."</td></tr>";
 			$message2.= "<tr><td><b>Date Format : </b></td><td>".$data['dateformat']."</td></tr>";
+			# ZOHO STATUS MESSAGE START
+			$message2.= "<tr><td colspan=2><b><u>ZOHO STATUS</u></b></td></tr>";
+			$message2.= "<tr><td><b>Partner Created in ZOHO : </b></td><td>".($partnerCreation == TRUE)?'Succeed':'Failed'."</td></tr>";
+			$message2.= "<tr><td><b>Contact Created in ZOHO : </b></td><td>".($contactCreation == TRUE)?'Succeed':'Failed'."</td></tr>";
+			$message2.= "<tr><td><b>Guide   Created in ZOHO : </b></td><td>".($guideCreation   == TRUE)?'Succeed':'Failed'."</td></tr>";
+			# ZOHO STATUS MESSAGE END
 			$message2.= "<tr><td><b>Guide Administration URL : </b></td><td>http://".$data['guide_name'].".townwizard.com/administrator</td></tr></table>";
 
 			$headers2 = "MIME-Version: 1.0\r\n";

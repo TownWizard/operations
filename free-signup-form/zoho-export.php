@@ -11,6 +11,15 @@ $signupDate		= '12/9/2014'; // Format 8/8/2014
 $zipcode		= '77477';
 $contactName	= 'Yogi Ghorecha';*/
 
+$accountName	= '<![CDATA['.$data['first_name'].' '.$data['last_name'].' %26 Co.]]>';
+$firstName		= $data['first_name'];
+$lastName		= $data['last_name'];
+$email			= $data['email'];
+$subject		= $data['guide_name'];
+$signupDate		= date("m/d/Y", strtotime("now"));  // Format 8/8/2014
+$zipcode		= $data['zip'];
+$contactName	= $data['first_name']." ".$data['last_name'];
+
 
 # ***** ACCOUNT MODULE ***** CURL Process
 setCurlParameter('Accounts'); // I created this function
@@ -19,10 +28,11 @@ $query = 'newFormat=2&authtoken=fd05fe57d221aba08aa657f9699fa0ce&scope=crmapi&xm
 curl_setopt($ch, CURLOPT_POSTFIELDS, $query);// Set the request as a POST FIELD for curl.
 $result = curl_exec($ch); // Execute cUrl session
 curl_close($ch);
-/*echo "<b>New Partner Account Added!</b><br>";
-echo $result;
-echo "<br><br>";*/
-
+//echo "<b>New Partner Account Added!</b><br>";
+//echo $result;
+//echo "<br><br>";
+# $partnerCreation will SET TRUE if data inserted successfully or FALSE if Failed to insert
+$partnerCreation = zohoInsertResponse($result);
 
 # ***** CONTACT MODULE ***** CURL Process 
 setCurlParameter('Contacts'); // I created this function
@@ -38,9 +48,11 @@ $query = 'newFormat=2&authtoken=fd05fe57d221aba08aa657f9699fa0ce&scope=crmapi&xm
 curl_setopt($ch, CURLOPT_POSTFIELDS, $query);// Set the request as a POST FIELD for curl.
 $result = curl_exec($ch); //Execute cUrl session
 curl_close($ch);
-/*echo "<b>New Contact Added!</b><br>";
-echo $result;
-echo "<br><br>";*/
+//echo "<b>New Contact Added!</b><br>";
+//echo $result;
+//echo "<br><br>";
+# $contactCreation will SET TRUE if data inserted successfully or FALSE if Failed to insert
+$contactCreation = zohoInsertResponse($result);
 
 
 # ***** SALES ORDERS MODULE ***** CURL Process 
@@ -72,16 +84,17 @@ $query = 'newFormat=2&authtoken=fd05fe57d221aba08aa657f9699fa0ce&scope=crmapi&xm
 curl_setopt($ch, CURLOPT_POSTFIELDS, $query);// Set the request as a POST FIELD for curl.
 $result = curl_exec($ch); //Execute cUrl session
 curl_close($ch);
-/*echo "<b>New Partner Guide Added!<br></b>";
-echo $result;
-echo "<br><br>";*/
+//echo "<b>New Partner Guide Added!<br></b>";
+//echo $result;
+//echo "<br><br>";
+# $guideCreation will SET TRUE if data inserted successfully or FALSE if Failed to insert
+$guideCreation = zohoInsertResponse($result);
+
 
 
 /**
-* 
 * @param Module Name to initiate CURL Process $module
 * @param Value of module parameter $value
-* 
 */
 function setCurlParameter($module,$value = NULL){
 	global $ch;
@@ -92,4 +105,17 @@ function setCurlParameter($module,$value = NULL){
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);//Set to return data to string ($response)
 	curl_setopt($ch, CURLOPT_POST, 1);//Regular post
 }
+
+/**
+* @param $result : Result from Zoho
+* $Return : True if data inserted False if Failed 
+*/
+function zohoInsertResponse($result){
+	if(strpos($result,'Record(s) added successfully') !== false) {
+    	return TRUE;
+	}else{
+		return FALSE;
+	}
+}
+
 ?>
