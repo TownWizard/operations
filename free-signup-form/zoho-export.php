@@ -114,7 +114,7 @@ function zohoInsertResponse($result){
 	if(strpos($result,'Record(s) added successfully') !== false) {
     	return TRUE;
 	}else{
-		return FALSE;
+		return $result;
 	}
 }
 

@@ -77,7 +77,8 @@ if (isset($key)){
 	  
 			  /**  ZOHO INTEGRATION CODE START  */	
 			 
-			$accountName	= '<![CDATA['.$data['first_name'].' %26 '.$data['last_name'].' Co.]]>';
+			//$accountName	= '<![CDATA['.$data['first_name'].' %26 '.$data['last_name'].' Co.]]>';
+			$accountName	= '<![CDATA['.$data['first_name'].' '.$data['last_name'].' %26 Co.]]>';
 			$firstName		= $data['first_name'];
 			$lastName		= $data['last_name'];
 			$email			= $data['email'];
@@ -113,10 +114,13 @@ if (isset($key)){
 			$message2.= "<tr><td><b>Time Zone : </b></td><td>".$data['timezone']."</td></tr>";
 			$message2.= "<tr><td><b>Date Format : </b></td><td>".$data['dateformat']."</td></tr>";
 			# ZOHO STATUS MESSAGE START
+			$partnerZohoStatus	= ($partnerCreation == TRUE)?'SUCEED':'ERROR '.$partnerCreation;
+			$contactZohoStatus	= ($contactCreation == TRUE)?'SUCEED':'ERROR '.$contactCreation;
+			$guideZohoStatus	= ($guideCreation == TRUE)?'SUCEED':'ERROR '.$guideCreation;
 			$message2.= "<tr><td colspan=2><b><u>ZOHO STATUS</u></b></td></tr>";
-			$message2.= "<tr><td><b>Partner Created in ZOHO : </b></td><td>".($partnerCreation == TRUE)?'Succeed':'Failed'."</td></tr>";
-			$message2.= "<tr><td><b>Contact Created in ZOHO : </b></td><td>".($contactCreation == TRUE)?'Succeed':'Failed'."</td></tr>";
-			$message2.= "<tr><td><b>Guide   Created in ZOHO : </b></td><td>".($guideCreation   == TRUE)?'Succeed':'Failed'."</td></tr>";
+			$message2.= "<tr><td><b>Partner Creation in ZOHO : </b></td><td>".$partnerZohoStatus."</td></tr>";
+			$message2.= "<tr><td><b>Contact Creation in ZOHO : </b></td><td>".$contactZohoStatus."</td></tr>";
+			$message2.= "<tr><td><b>Guide   Creation in ZOHO : </b></td><td>".$guideZohoStatus."</td></tr>";
 			# ZOHO STATUS MESSAGE END
 			$message2.= "<tr><td><b>Guide Administration URL : </b></td><td>http://".$data['guide_name'].".townwizard.com/administrator</td></tr></table>";
 
