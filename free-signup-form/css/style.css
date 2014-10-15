@@ -1,22 +1,24 @@
 @charset "UTF-8";
 /* Fonts */
 @import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
+
+
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700);
 /*---------------------------------
-RESETS 
+RESETS
 ------------------------------------------*/
 
-* { 
-    margin: 0; 
-    padding: 0; 
+* {
+	margin: 0;
+	padding: 0;
 }
 
-a  { 
-	text-decoration: none; 
-	outline: 0; 
+a  {
+	text-decoration: none;
+	outline: 0;
 }
 
-a img { border: 0; }
+a img { border: 0;}
 
 .stretch,.clear {
 	clear: both;
@@ -35,9 +37,9 @@ a img { border: 0; }
 	content: ".";
 }
 
-p { 
-	line-height: 1.5; 
-	margin: 0 0 15px 0; 
+p {
+	line-height: 1.5;
+	margin: 0 0 15px 0;
 }
 
 #simple-msg{
@@ -47,7 +49,7 @@ p {
 GLOBAL
 ------------------------------------------*/
 
-html, body { 
+html, body {
 	margin: 0;
 	padding: 0;
 	/*background-color: #f9f9f9;*/
@@ -61,14 +63,14 @@ HEADINGS
 ------------------------------------------*/
 
 h1 {
-  color: #404141;
-  font-size: 30px;
-  font-weight: normal;
-  letter-spacing: 3px;
-  line-height: 30px;
-  margin: auto auto 25px;
-  padding: 0;
-  text-transform: uppercase;
+	color: #404141;
+	font-size: 30px;
+	font-weight: normal;
+	letter-spacing: 3px;
+	line-height: 30px;
+	margin: 12px auto;
+	padding: 0;
+	text-transform: uppercase;
 }
 
 /*-------------------------------------
@@ -86,16 +88,16 @@ ul li {
 	padding: 0;
 }
 
-label.error { 
+label.error {
 	display: block;
-	color: red;                              
-	font-size: 11px; 
+	color: red;
+	font-size: 11px;
 	font-weight: bold;
 }
 
 #logo{
 	margin: 20px auto auto;
-    width: 262px;
+	width: 262px;
 }
 #logo img{
 	display: none;
@@ -107,11 +109,20 @@ FORM CORE
 #container {
 	background: none repeat scroll 0 0 #edeaea;
 	border-radius: 10px;
-	margin: 3% auto;
+	margin: auto;
 	min-width: 773px;
 	padding: 15px 0;
 	text-align: center;
 	width: 773px;
+}
+#spcontainer {
+    background: none repeat scroll 0 0 #edeaea;
+    border-radius: 10px;
+    margin: 3% auto;
+    min-width: 773px;
+    padding: 15px 0;
+    text-align: center;
+    width: 773px;
 }
 form#contact {
 
@@ -130,35 +141,35 @@ form#contact fieldset {
 	width: 290px;
 	text-align: left;
 	border-radius: 8px;
-    -webkit-border-radius: 8px;
-    -moz-border-radius: 8px;
-    -moz-box-shadow: 0px 0px 10px #d3d3d3; 
-	-webkit-box-shadow: 0px 2px 10px #d3d3d3; 
-	box-shadow: 0px 0px 10px #d3d3d3; 
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	-moz-box-shadow: 0px 0px 10px #d3d3d3;
+	-webkit-box-shadow: 0px 2px 10px #d3d3d3;
+	box-shadow: 0px 0px 10px #d3d3d3;
 }
 #samplegname{
-  clear: both;
-  float: left;
-  text-align: left;
-  width: 100%;
- margin-bottom: 6px;
+	clear: both;
+	float: left;
+	text-align: left;
+	width: 100%;
+	margin-bottom: 6px;
 }
 .specialrow{
-	  float: left;
-  margin-bottom: 5px;
-  margin-right: 20px;
-  overflow: hidden;
-  padding: 5px;
-  width: 45%;
+	float: left;
+	margin-bottom: 5px;
+	margin-right: 20px;
+	overflow: hidden;
+	padding: 5px;
+	width: 45%;
 
 }
 .row {
-  float: left;
-  margin-bottom: 5px;
-  margin-right: 20px;
-  overflow: hidden;
-  padding: 5px;
-  width: 45%;
+	float: left;
+	margin-bottom: 5px;
+	margin-right: 20px;
+	overflow: hidden;
+	padding: 5px;
+	width: 45%;
 }
 form#contact input[type="text"], input[type="url"], input[type="number"], input[type="password"], input[type="email"], input[type="tel"], select, textarea {
 	background: #fbfbfb;
@@ -178,28 +189,28 @@ form#contact select {
 }
 
 form#contact textarea {
-	width: 275px; 
+	width: 275px;
 	height: 150px;
 }
 
 form#contact label {
-  display: block;
-  float: left;
-  font-size: 13px;
-  line-height: 17px;
-  margin: 2px 0;
-  padding: 4px 0;
-  text-align: left;
-  width: 89px;
- font-family: "Montserrat",sans-serif;
+	display: block;
+	float: left;
+	font-size: 13px;
+	line-height: 17px;
+	margin: 2px 0;
+	padding: 4px 0;
+	text-align: left;
+	width: 89px;
+	font-family: "Montserrat",sans-serif;
 }
 
-form#contact label.error { 
+form#contact label.error {
 	width: 270px;
 	margin: 3px 0 0 0;
 	display: block;
-	color: #cf0101;                              
-	font-size: 11px; 
+	color: #cf0101;
+	font-size: 11px;
 	text-align: right;
 }
 
@@ -224,11 +235,11 @@ form#contact2 fieldset {
 	width: 290px;
 	text-align: left;
 	border-radius: 8px;
-    -webkit-border-radius: 8px;
-    -moz-border-radius: 8px;
-    -moz-box-shadow: 0px 0px 10px #d3d3d3; 
-	-webkit-box-shadow: 0px 2px 10px #d3d3d3; 
-	box-shadow: 0px 0px 10px #d3d3d3; 
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	-moz-box-shadow: 0px 0px 10px #d3d3d3;
+	-webkit-box-shadow: 0px 2px 10px #d3d3d3;
+	box-shadow: 0px 0px 10px #d3d3d3;
 }
 
 #stage2{
@@ -246,17 +257,17 @@ form#contact2 fieldset {
 
 form#contact2 select {
 	margin: 3px 0 0 0;
-	padding: 6px; 
-	width: 273px; 
-	font-family: arial, sans-serif; 
-	font-size: 12px; 
+	padding: 6px;
+	width: 273px;
+	font-family: arial, sans-serif;
+	font-size: 12px;
 	border: 1px solid #ccc;
 	background: -webkit-gradient(linear, left top, left 15, from(#FFFFFF), color-stop(4%, #f4f4f4), to(#FFFFFF));
 	background: -moz-linear-gradient(top, #FFFFFF, #f4f4f4 1px, #FFFFFF 15px);
 }
 
 form#contact2 textarea {
-	width: 275px; 
+	width: 275px;
 	height: 150px;
 }
 
@@ -268,12 +279,12 @@ form#contact2 label {
 	text-align: left;
 }
 
-form#contact2 label.error { 
+form#contact2 label.error {
 	width: 270px;
 	margin: 3px 0 0 0;
 	display: block;
-	color: #cf0101;                              
-	font-size: 11px; 
+	color: #cf0101;
+	font-size: 11px;
 	text-align: right;
 }
 
@@ -289,16 +300,16 @@ form#contact p {
 	text-align: left;
 }
 form#contact p a{
-    color: #d72128;
-    font-size: 12px;
+	color: #d72128;
+	font-size: 12px;
 }
 form#contact {
-  border-radius: 5px;
-  clear: both;
-  margin: auto;
-  overflow: hidden;
-  padding: 10px 50px 0;
-  width: 80%;
+	border-radius: 5px;
+	clear: both;
+	margin: auto;
+	overflow: hidden;
+	padding: 10px 50px 0;
+	width: 80%;
 }
 .myButton {
 	background: #f2333a;
@@ -318,62 +329,62 @@ form#contact {
 }
 
 /*.myButton:hover{
-	cursor: pointer;
-	background: #f7f7f7;
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f7f7f7), color-stop(50%,#f7f7f7), color-stop(51%,#f7f7f7), color-stop(100%,#f7f7f7));
-	color: #f2333a;
+cursor: pointer;
+background: #f7f7f7;
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f7f7f7), color-stop(50%,#f7f7f7), color-stop(51%,#f7f7f7), color-stop(100%,#f7f7f7));
+color: #f2333a;
 }*/
 
 .success {
-  background-position: 10px center;
-  background-repeat: no-repeat;
-  color: #333;
-  font-size: 140%;
-  margin: 10px auto;
-  padding: 10px 53px;
-  text-align: justify;
+	background-position: 10px center;
+	background-repeat: no-repeat;
+	color: #333;
+	font-size: 140%;
+	margin: 10px auto;
+	padding: 10px 40px;
+	text-align: justify;
 
 }
 strong{
 	color: #000;
 }
- .errormsgbox {
+.errormsgbox {
 	border: 1px solid;
 	margin: 0 auto;
-	padding:10px 60px;
+	padding: 10px 40px;
 	background-repeat: no-repeat;
 	background-position: 10px center;
-	width:450px;
+	width: 450px;
 	color: #D8000C;
 	background-color: #FFBABA;
 	font-size: 130%;
 }
 .require{
-	color:red;
+	color: red;
 }
 input.disable{
 	background: #fff !important;
 	border: none !important;
-	width:100% !important;
+	width: 100% !important;
 	font-weight: bold;
 }
 
 /***********************/
 
 /*:invalid {
- 	box-shadow: none; 
-    outline: 0;    
+box-shadow: none;
+outline: 0;
 }
- :valid {
-    border: 1px solid rgba(0, 0, 0, 0.25);
+:valid {
+border: 1px solid rgba(0, 0, 0, 0.25);
 }*/
 
 /*.invalid input:required:invalid {
-    background: #BE4C54;
+background: #BE4C54;
 }
 
 .invalid input:required:valid {
-    background: #17D654 ;
+background: #17D654 ;
 }*/
 
 input {
@@ -390,19 +401,25 @@ input:required:invalid {
 }
 
 #email {
-   background: #c9c9c9;
-    cursor: default;
-} 
+	background: #c9c9c9;
+	cursor: default;
+}
 @media only screen and (min-width:600px) and (max-width:799px){
 	h1{
 		font-size: 19px;
 	}
 	#container {
 		min-width: initial;
-		width: 90%;
+		width: 100%;
+	}
+	#spcontainer {
+		font-size: 90%;
+		/*margin-top: 1004px;*/
+		min-width: initial;
+		width: 100%;
 	}
 	form#contact input[type="text"], input[type="url"], input[type="number"], input[type="password"], input[type="email"], input[type="tel"], select, textarea {
-   		float: left;
+		float: left;
 	}
 	.row,.specialrow {
 		margin-right: 0;
@@ -413,7 +430,7 @@ input:required:invalid {
 		padding-top: 9px;
 	}
 	#captcha{
-		margin-left:0px !important;
+		margin-left: 0px !important;
 		margin-top: 12px;
 		width: 130px !important;
 	}
@@ -425,14 +442,20 @@ input:required:invalid {
 	}
 	#container {
 		min-width: initial;
-		width: 90%;
+		width: 100%;
 	}
+	#spcontainer {
+		font-size: 85%;
+		/*margin-top: 1004px;*/
+		min-width: initial;
+		width: 100%;
+	}	
 	form#contact input[type="text"], input[type="url"], input[type="number"], input[type="password"], input[type="email"], input[type="tel"], select, textarea {
-   		float: left;
+		float: left;
 		width: 95%;
 	}
 	form#contact select {
-	    width: 100%;
+		width: 100%;
 	}
 	.row,.specialrow {
 		margin-right: 0;
@@ -443,7 +466,7 @@ input:required:invalid {
 		padding-top: 9px;
 	}
 	#captcha{
-		margin-left:0px !important;
+		margin-left: 0px !important;
 		margin-top: 12px;
 		width: 130px !important;
 	}
@@ -451,7 +474,13 @@ input:required:invalid {
 @media only screen and (min-width:361px) and (max-width:479px){
 	#container {
 		min-width: initial;
-		width: 90%;
+		width: 100%;
+	}
+	#spcontainer {
+		font-size: 80%;
+		/*margin-top: 948px;*/
+		min-width: initial;
+		width: 100%;
 	}
 	h1{
 		font-size: 19px;
@@ -469,31 +498,40 @@ input:required:invalid {
 		padding: 2% 10%;
 		width: 80%;
 	}
-	.row,.specialrow {
-		margin: 0;
+	.specialrow {
+		margin-right: 2px;
 		padding: 3px 0;
-		width: 90%;
+		width: 95%;
 	}
-	
+	.row{
+		margin:0 2px 0 0;
+		padding: 0;width: 95%;
+	}
+
 	#contact div:nth-of-type(14){
 		padding-top: 12px;
 	}
 	#captcha{
-		margin-left:0px !important;
+		margin-left: 0px !important;
 		width: 130px !important;
 	}
-		form#contact input[type="text"], input[type="url"], input[type="number"], input[type="password"], input[type="email"], input[type="tel"], select, textarea {
-   		width: 95%;
+	form#contact input[type="text"], input[type="url"], input[type="number"], input[type="password"], input[type="email"], input[type="tel"], select, textarea {
+		width: 95%;
 	}
 	form#contact select {
-	    width: 98%;
-	  color: #999999;
+		width: 98%;
 	}
 }
 @media only screen and (min-width:240px) and (max-width:360px){
 	#container {
 		min-width: initial;
-		width: 90%;
+		width: 100%;
+	}
+	#spcontainer {
+		font-size: 80%;
+		/*margin-top: 896px;*/
+		min-width: initial;
+		width: 100%;
 	}
 	h1{
 		font-size: 19px;
@@ -514,21 +552,22 @@ input:required:invalid {
 	.row,.specialrow {
 		margin: 0;
 		padding: 3px 0;
-		width: 90%;
+		width: 99%;
 	}
-	
+
 	#contact div:nth-of-type(14){
 		padding-top: 12px;
 	}
 	#captcha{
-		margin-left:0px !important;
+		margin-left: 0px !important;
 		width: 130px !important;
 	}
-		form#contact input[type="text"], input[type="url"], input[type="number"], input[type="password"], input[type="email"], input[type="tel"], select, textarea {
-   		width: 95%;
+	form#contact input[type="text"], input[type="url"], input[type="number"], input[type="password"], input[type="email"], input[type="tel"], select, textarea {
+		margin-right: 2px;
+    		width: 93%;
 	}
 	form#contact select {
-	    width: 98%;
-	  color: #999999;
+		width: 98%;
+		
 	}
 }

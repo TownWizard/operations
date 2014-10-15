@@ -63,7 +63,7 @@ h1 {
   font-weight: normal;
   letter-spacing: 3px;
   line-height: 30px;
-  margin: auto auto 25px;
+  margin: 12px auto;
   padding: 0;
   text-transform: uppercase;
 }
@@ -106,7 +106,7 @@ display: none;
 FORM CORE
 ------------------------------------------*/
 #container {
-	margin: 3% auto;
+	margin: auto;
 	text-align: center;
 	width:773px;
 	background: #edeaea;
@@ -306,7 +306,7 @@ form#contact p a{
  .success {
 	border: 1px solid;
 	margin: 0 auto;
-	padding:10px 60px;
+	padding:10px 40px;
 	background-repeat: no-repeat;
 	background-position: 10px center;
 	text-align: left;
@@ -319,7 +319,7 @@ form#contact p a{
  .errormsgbox {
 	border: 1px solid;
 	margin: 0 auto;
-	padding:10px 60px;
+	padding:10px 40px;
 	background-repeat: no-repeat;
 	background-position: 10px center;
 	width:450px;
@@ -373,7 +373,7 @@ input:invalid:focus {
 	}
 	#container {
 		min-width: initial;
-		width: 90%;
+		width: 100%;
 	}
 }
 @media only screen and (min-width:480px) and (max-width:599px){
@@ -382,7 +382,7 @@ input:invalid:focus {
 	}
 	#container {
 		min-width: initial;
-		width: 90%;
+		width: 100%;
 	}
 	form#contact input[type="text"], input[type="url"], input[type="number"], input[type="password"], input[type="email"], input[type="tel"], select, textarea {
    		float: left;
@@ -406,7 +406,7 @@ input:invalid:focus {
 @media only screen and (min-width:361px) and (max-width:479px){
 	#container {
 		min-width: initial;
-		width: 90%;
+		width: 100%;
 	}
 	h1{
 		font-size: 19px;
@@ -442,13 +442,12 @@ input:invalid:focus {
 	}
 	form#contact select {
 	    width: 98%;
-	  color: #999999;
 	}
 }
 @media only screen and (min-width:240px) and (max-width:360px){
 	#container {
 		min-width: initial;
-		width: 90%;
+		width: 100%;
 	}
 	h1{
 		font-size: 20px;

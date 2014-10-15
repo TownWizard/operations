@@ -11,14 +11,14 @@ $signupDate		= '12/9/2014'; // Format 8/8/2014
 $zipcode		= '77477';
 $contactName	= 'Yogi Ghorecha';*/
 
-$accountName	= '<![CDATA['.$data['first_name'].' '.$data['last_name'].' %26 Co.]]>';
+/*$accountName	= '<![CDATA['.$data['first_name'].' '.$data['last_name'].' %26 Co.]]>';
 $firstName		= $data['first_name'];
 $lastName		= $data['last_name'];
 $email			= $data['email'];
 $subject		= $data['guide_name'];
 $signupDate		= date("m/d/Y", strtotime("now"));  // Format 8/8/2014
 $zipcode		= $data['zip'];
-$contactName	= $data['first_name']." ".$data['last_name'];
+$contactName	= $data['first_name']." ".$data['last_name'];*/
 
 
 # ***** ACCOUNT MODULE ***** CURL Process
