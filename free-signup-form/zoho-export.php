@@ -2,7 +2,7 @@
 ini_set("display_errors",1);
 
 # DEFINE Partner Value in variable
-/*$accountName	= '<![CDATA[Yogi %26 Ghorecha Co.]]>';
+/*$accountName	= '<![CDATA[Yogi Ghorecha %26  Co.]]>';
 $firstName		= 'Yogi';
 $lastName		= 'Ghorecha';
 $email			= 'yogi@yogiinfo.com';
@@ -11,14 +11,14 @@ $signupDate		= '12/9/2014'; // Format 8/8/2014
 $zipcode		= '77477';
 $contactName	= 'Yogi Ghorecha';*/
 
-/*$accountName	= '<![CDATA['.$data['first_name'].' '.$data['last_name'].' %26 Co.]]>';
+$accountName	= '<![CDATA['.$data['first_name'].' '.$data['last_name'].' %26 Co.]]>';
 $firstName		= $data['first_name'];
 $lastName		= $data['last_name'];
 $email			= $data['email'];
 $subject		= $data['guide_name'];
 $signupDate		= date("m/d/Y", strtotime("now"));  // Format 8/8/2014
 $zipcode		= $data['zip'];
-$contactName	= $data['first_name']." ".$data['last_name'];*/
+$contactName	= $data['first_name']." ".$data['last_name'];
 
 
 # ***** ACCOUNT MODULE ***** CURL Process
@@ -90,6 +90,9 @@ curl_close($ch);
 # $guideCreation will SET TRUE if data inserted successfully or FALSE if Failed to insert
 $guideCreation = zohoInsertResponse($result);
 
+if($partnerCreation == 'SUCCESS')$partnerZohoStatus = 'Succeed'; else $partnerZohoStatus = 'ERROR '.$partnerCreation;
+if($contactCreation == 'SUCCESS')$contactZohoStatus = 'Succeed'; else $contactZohoStatus = 'ERROR '.$contactCreation;
+if($guideCreation == 'SUCCESS')$guideZohoStatus = 'Succeed'; else $guideZohoStatus = 'ERROR '.$guideCreation;
 
 
 /**
@@ -112,7 +115,7 @@ function setCurlParameter($module,$value = NULL){
 */
 function zohoInsertResponse($result){
 	if(strpos($result,'Record(s) added successfully') !== false) {
-    	return TRUE;
+    	return 'SUCCESS';
 	}else{
 		return $result;
 	}

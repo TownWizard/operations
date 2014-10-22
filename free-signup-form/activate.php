@@ -114,9 +114,6 @@ if (isset($key)){
 			$message2.= "<tr><td><b>Time Zone : </b></td><td>".$data['timezone']."</td></tr>";
 			$message2.= "<tr><td><b>Date Format : </b></td><td>".$data['dateformat']."</td></tr>";
 			# ZOHO STATUS MESSAGE START
-			$partnerZohoStatus	= ($partnerCreation == TRUE)?'SUCEED':'ERROR '.$partnerCreation;
-			$contactZohoStatus	= ($contactCreation == TRUE)?'SUCEED':'ERROR '.$contactCreation;
-			$guideZohoStatus	= ($guideCreation == TRUE)?'SUCEED':'ERROR '.$guideCreation;
 			$message2.= "<tr><td colspan=2><b><u>ZOHO STATUS</u></b></td></tr>";
 			$message2.= "<tr><td><b>Partner Creation in ZOHO : </b></td><td>".$partnerZohoStatus."</td></tr>";
 			$message2.= "<tr><td><b>Contact Creation in ZOHO : </b></td><td>".$contactZohoStatus."</td></tr>";
