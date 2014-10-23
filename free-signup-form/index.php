@@ -7,7 +7,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-	<link rel="stylesheet" href="css/style1.css">
+	<link rel="stylesheet" href="css/style.css">
 	<title>Initial Sign Up</title>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width; initial-scale=1.0">
@@ -121,9 +121,9 @@
 	<h1>Create your town's guide</h1>
 	<div id="stage1"></div>
 	<span>Create Your Community's #1 Mobile Guide Business.</span>
-	<form id="contact"  action="process.php" method="POST" class="validate-form">
+	<form id="contact"  action="process.php" method="POST" class="validate-form1">
 		<div id="simple-msg"></div>
-		<input type="email" name="email" id="email" placeholder="Your email" required oninvalid="setCustomValidity('Valid email address required.')" onchange="try{setCustomValidity('')}catch(e){}" pattern="([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})" />
+		<input type="email" name="email" class="spemail" id="email" placeholder="Your email" required oninvalid="setCustomValidity('Valid email address required.')" onchange="try{setCustomValidity('')}catch(e){}" pattern="([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})" />
 		<input type="submit" name="submit" class="myButton" id="Signup" value="Signup"  />
 	</form>
 

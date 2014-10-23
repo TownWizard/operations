@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="css/style.css">
 	<title>Initial Sign Up</title>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="viewport" content="width=device-width; initial-scale=1.0">
+	<meta name="viewport" content="width=device-width">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
 	<script type="text/javascript">
@@ -274,7 +274,7 @@ if (isset($email)){
 			</select>
 		</div>		
 		
-		<div class="row">
+<!--		<div class="row">
 			<label for="time_zone">Time zone</label>
 			<select name="time_zone" id="time_zone" class="inputbox" size="1">
 				<option value="-12:00:00">(GMT -12:00) Eniwetok, Kwajalein</option>
@@ -339,15 +339,20 @@ if (isset($email)){
 				<option value="KM">KM</option>
 				<option value="Miles" selected>Miles</option>
 			</select>
-		</div>	
+		</div>-->	
 		
+		<input type="hidden" value="<?php echo "-5:00:00"; ?>" name="time_zone" id="time_zone" />
+		<input type="hidden" value="<?php echo "24"; ?>" name="time_format" id="time_format" />
+		<input type="hidden" value="<?php echo "mmdd"; ?>" name="date_format" id="date_format" />
+		<input type="hidden" value="<?php echo "f"; ?>" name="temperature" id="temperature" />
+		<input type="hidden" value="<?php echo "Miles"; ?>" name="distance" id="distance"/>
 
 		<div class="specialrow">
 			<img src="captcha.php" id="captcha" style="width: 44%;vertical-align: middle;margin-left: 81px;" />
 			<a href="#" onclick="document.getElementById('captcha').src='captcha.php?'+Math.random(); document.getElementById('captcha-form').focus();" id="change-image" style="color:#d72128; margin-left: 7px;">Refresh</a>
 		</div>
 		
-		<div class="specialrow" style="padding-top: 12px;">
+		<div class="specialrow" >
 			<label for="captcha">Add captcha</label>
 			<input type="text" name="captcha" id="captcha-form" placeholder="captcha" autocomplete="off" required oninvalid="setCustomValidity('Please enter valid captcha')" onchange="try{setCustomValidity('')}catch(e){}" />
 		</div>		
@@ -355,7 +360,6 @@ if (isset($email)){
 		<input type="hidden" value="<?php echo $internalurl; ?>" name="url" />
 		
 		<p>By clicking below to sign up, you are agreeing to the TownWizard <a href="http://townwizard.com/responsive/license.html" target="_blank" >License Agreement</a>.</p>
-			
 			
 			<input type="submit" name="submit" class="myButton" id="Signup" value="Signup"  />
 		</form>
