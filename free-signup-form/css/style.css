@@ -118,11 +118,10 @@ FORM CORE
 #spcontainer {
     background: none repeat scroll 0 0 #edeaea;
     border-radius: 10px;
-    margin: 3% auto;
-    min-width: 773px;
+    margin: auto;
     padding: 15px 0;
     text-align: center;
-    width: 773px;
+    width: 366px;
 }
 form#contact {
 
@@ -149,9 +148,9 @@ form#contact fieldset {
 }
 #samplegname{
 	clear: both;
-	float: left;
+	float: right;
 	text-align: left;
-	width: 100%;
+	width: 98%;
 	margin-bottom: 6px;
 }
 .specialrow{

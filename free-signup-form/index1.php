@@ -244,13 +244,11 @@ if (isset($email)){
 			<label for="website">Guide Name<span class="require">*</span></label>
 			<input type="text" name="gname" id="gname" placeholder="Selected guide name" required oninvalid="setCustomValidity('Guide Name required. Blank spaces not allowed.')" onchange="try{setCustomValidity('')}catch(e){}" pattern="[a-zA-Z0-9]+" />
 		</div>
-		
+		<span id="samplegname"></span>
 		<div class="row">
 			<label for="email">E-mail<span class="require">*</span></label>
 			<input type="email" name="email" id="email" placeholder="yourname@domain.com" required oninvalid="setCustomValidity('Valid email address required.')" onchange="try{setCustomValidity('')}catch(e){}" value="<?php echo $email; ?>" pattern="([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})" readonly />
 		</div>
-		
-		<span id="samplegname"></span>
 		
 		<div class="row">
 			<label for="pass">Password<span class="require">*</span></label>
