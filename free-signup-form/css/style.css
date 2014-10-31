@@ -183,7 +183,7 @@ form#contact input[type="text"], input[type="url"], input[type="number"], input[
 }
 
 form#contact select {
-	width: 189px;
+	width: 187px;
 	color: #000000;
 }
 form.validate-form1 .spemail {
@@ -250,7 +250,12 @@ form#contact2 fieldset {
 	-webkit-box-shadow: 0px 2px 10px #d3d3d3;
 	box-shadow: 0px 0px 10px #d3d3d3;
 }
-
+#stage1{
+	background: url("../step1.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+	height: 22px;
+	margin: 5px auto;
+	width: 82px;
+}
 #stage2{
 	background: url("../step2.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
 	height: 22px;
@@ -451,7 +456,7 @@ input:required:invalid {
 		width: 130px !important;
 	}
 	form#contact input[type="text"], input[type="url"], input[type="number"], input[type="password"], input[type="email"], input[type="tel"], select, textarea {
-		margin-right: 2px;
+		margin: 0px 2px;
     		width: 93%;
 		float: left;
 	}
