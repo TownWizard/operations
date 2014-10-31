@@ -224,5 +224,5 @@ function updateProcess($did){
 			echo $callback . "(" . json_encode($response) . ")";
 			exit;
 		}
-	}				
+	}	 			
 ?> 
