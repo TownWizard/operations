@@ -1,4 +1,6 @@
 <?php
+# Included file for Amazon Email feature
+include "twmailer.php";
 
 session_start(); 
 include "emailtemplate.php";
@@ -110,30 +112,20 @@ function insertProcess($data){
 				$link = $_REQUEST['url']."/activate.php?key=" .$activation;
 
 				$message .= $headercode; 
-				
 				$message .= '<tr><td>&nbsp;</td><td><p style="font:22px Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:bold;margin:0px 0 0 0;padding:0;color:#000;">Congratulations</p><p style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:20px 0 5px 0;padding:0;">Thanks for signing up for your free local guide from TownWizard! Click the email verification link below to complete the guide setup process.</p></td><td>&nbsp;</td></tr>';
-				
 				$message .= '<tr><td>&nbsp;</td><td style="text-align: center"><a href='.$link.' target="_blank" style="text-decoration: none; background: #e5292f; padding: 10px; margin: 10px 0px; color: rgb(255, 255, 255); border-radius: 5px; text-transform: capitalize; font: 20px/55px Helvetica Neue,Helvetica,Arial,sans-serif; box-shadow: 0px 1px 2px 2px rgba(0, 0, 0, 0.25);">click here </a></td><td>&nbsp;</td></tr>';
-				
 				$message .= '<tr><td>&nbsp;</td><td><p style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">Once You click on above link, Your new local guide will ready! Check out the site link and login information below.</p></td><td>&nbsp;</td></tr>';	
-											
 				$message .= '<tr><td height="100">&nbsp;</td><td> 
 					<table cellspacing="5"><tbody><tr><td width="170" style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">Guide Name : </td><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">'.$data['gname'].'</td></tr>
 					<tr><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">Guide Administration URL : </td><td><a target="_blank" href="http://'.$data['gname'].'.townwizard.com/administrator" style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#1a1a1a;text-decoration:none;">http://'.$data['gname'].'.townwizard.com/administrator</a></td></tr>
 					<tr><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">Username : </td><td><a href="mailto:'.$data['email'].'" style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#1a1a1a;text-decoration:none;">'.$data['email'].'</a></td></tr>
 					<tr><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">Password : </td><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">(password that you specified)</td></tr></tbody></table>
 				</td><td>&nbsp;</td></tr>';
-				
 				$message .= '<tr><td height="100">&nbsp;</td><td><p style="font:15px Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:bold;margin:7px 0;color:#000000;">We are here to help.</p><p style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">You are invited to access TownWizard\'s Customer Self Service Portal. You can access the support site at <a target="_blank" href="http://www.townwizard.org/" style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#1a1a1a;text-decoration:none;">http://www.townwizard.org</a>.</p></td><td>&nbsp;</td></tr>';
-				
 				//$message .= '<tr><td>&nbsp;</td><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">Username : <a href="mailto:'.$data['email'].'" style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#1a1a1a;text-decoration:none;">'.$data['email'].'</a></td><td>&nbsp;</td></tr>';
-				
 				//$message .= '<tr><td>&nbsp;</td><td><p style="font:15px Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:bold;margin:7px 0;color:#000000;">Please <a target="_blank" href="#" style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:bold;color:#1a1a1a;text-decoration:none;">click here</a> to accept invitation and set your password.</p><p style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">if you are not intended recipient of this invite, please contact the TownWizard Administrator.</p><p style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">If you face any difficulty while activation, please do not hasitate to send an email at <a target="_blank" href="mailto:support@townwizard.com" style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#1a1a1a;text-decoration:none;">Support@townwizard.com</a>.</p></td></tr>';
-				
 				$message .= '<tr><td>&nbsp;</td><td><p style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">Thank you,</p><p style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">The TownWizard Team</p></td><td>&nbsp;</td></tr>';
-				
 				//$message .= '<tr><td>&nbsp;</td><td><p style="font:15px Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:bold;margin:7px 0;color:#000000;">Please use following browsers for account activation:</p><p style="font:15px Helvetica Neue,Helvetica,Arial,sans-serif;margin:7px 0;color:#000000;">Latest version of Google Chrome, Mozilla Firefox, Internet explorer 9,10</p></td><td>&nbsp;</td></tr>';
-				
 				//$message .= '<tr><td height="50">&nbsp;</td><td><p style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">Please <a target="_blank" href="http://www.townwizard.org/" style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#1a1a1a;text-decoration:none;">click here</a> to access help documentation regarding account activation</p></td><td>&nbsp;</td></tr>';
 				$message .= $footercode;
 				
@@ -141,7 +133,8 @@ function insertProcess($data){
 				$headers .= "Content-type:text/html;charset=iso-8859-1\r\n";
 				$headers .= "From:TownWizard<no-reply@townwizard.com>";
 				
-				$insertmail = mail($data['email'], 'TownWizard Signup Email Verification', $message, $headers);
+				# OLD EMAIL CODE
+				/*$insertmail = mail($data['email'], 'TownWizard Signup Email Verification', $message, $headers);
 				if($insertmail){
 					//echo "<br/>Entry Inserted and mail sent.";
 					$response=array('status'=>100);
@@ -150,7 +143,22 @@ function insertProcess($data){
 					exit;
 				}else{
 					echo '<div class="errormsgbox">You could not be registered due to a system error. We apologize for any inconvenience.</div>';
-				}	
+				}*/
+				
+				# NEW EMAIL CODE
+				$insertmail = sendTwMail($data['email'],'TownWizard Signup Email Verification',$message,'operations@townwizard.com');
+				if($insertmail == 'SUCCEED'){
+					//echo "<br/>Entry Inserted and mail sent.";
+					$response	= array('status'=>100);
+					$callback	= $_GET["callback"];
+					echo $callback . "(" . json_encode($response) . ")";
+					exit;
+				}else{
+					$response	= $insertmail;
+					$callback	= $_GET["callback"];
+					echo $callback . "(" . json_encode($response) . ")";
+					exit;
+				}
 			}else{
 				echo '<div class="errormsgbox">You could not be registered due to a system error. We apologize for any inconvenience.</div>';
 			}
