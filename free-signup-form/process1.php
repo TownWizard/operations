@@ -43,7 +43,7 @@ if (!empty($_REQUEST['captcha'])) {
 		if(!$con2){die('Could not connect: ' . mysql_error($con2));}
 		$dblink2 = mysql_select_db("master");
 
-		$emailquery = "SELECT `id`,`guide_name`,`email`,`time`,`user_status` from user_signup WHERE `email`= '".$email."'  ";
+/*		$emailquery = "SELECT `id`,`guide_name`,`email`,`time`,`user_status` from user_signup WHERE `email`= '".$email."'  ";
 		$resultemail = mysql_query($emailquery);
 
 		if(mysql_num_rows($resultemail)>0){ 
@@ -64,7 +64,7 @@ if (!empty($_REQUEST['captcha'])) {
 				}
 			}
 
-		}else{	
+		}else{	*/
 			//echo "Email id is not found So,Cheking guide name";
 			$ctime = time();
 			$guidesql = "SELECT `id`,`guide_name`,`email`,`time`,`user_status` from user_signup WHERE `guide_name`= '".$gname."' AND user_status='0' "; 
@@ -78,7 +78,7 @@ if (!empty($_REQUEST['captcha'])) {
 				//echo "<br/>We dont find email ID but guidename is there so cheking time.";
 				checkDataLoop($resultguidename);
 			}
-		} 																																										
+		/*}*/ 																																										
 	 }
   
 	$request_captcha = htmlspecialchars($_REQUEST['captcha']);
@@ -116,8 +116,8 @@ function insertProcess($data){
 				$message .= '<tr><td>&nbsp;</td><td style="text-align: center"><a href='.$link.' target="_blank" style="text-decoration: none; background: #e5292f; padding: 10px; margin: 10px 0px; color: rgb(255, 255, 255); border-radius: 5px; text-transform: capitalize; font: 20px/55px Helvetica Neue,Helvetica,Arial,sans-serif; box-shadow: 0px 1px 2px 2px rgba(0, 0, 0, 0.25);">click here </a></td><td>&nbsp;</td></tr>';
 				$message .= '<tr><td>&nbsp;</td><td><p style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">Once You click on above link, Your new local guide will ready! Check out the site link and login information below.</p></td><td>&nbsp;</td></tr>';	
 				$message .= '<tr><td height="100">&nbsp;</td><td> 
-					<table cellspacing="5"><tbody><tr><td width="170" style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">Guide Name : </td><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">'.$data['gname'].'</td></tr>
-					<tr><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">Guide Administration URL : </td><td><a target="_blank" href="http://'.$data['gname'].'.townwizard.com/administrator" style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#1a1a1a;text-decoration:none;">http://'.$data['gname'].'.townwizard.com/administrator</a></td></tr>
+					<table cellspacing="5"><tbody><tr><td width="180" style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">Guide Name : </td><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">'.$data['gname'].'</td></tr>
+					<tr><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;vertical-align: top;">Guide Administration URL : </td><td><a target="_blank" href="http://'.$data['gname'].'.townwizard.com/administrator" style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#1a1a1a;text-decoration:none;">http://'.$data['gname'].'.townwizard.com/administrator</a></td></tr>
 					<tr><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">Username : </td><td><a href="mailto:'.$data['email'].'" style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#1a1a1a;text-decoration:none;">'.$data['email'].'</a></td></tr>
 					<tr><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">Password : </td><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">(password that you specified)</td></tr></tbody></table>
 				</td><td>&nbsp;</td></tr>';
@@ -154,7 +154,8 @@ function insertProcess($data){
 					echo $callback . "(" . json_encode($response) . ")";
 					exit;
 				}else{
-					$response	= $insertmail;
+					//echo "<br/>Entry Inserted and mail not sent.";
+					$response	= array('status'=>200);
 					$callback	= $_GET["callback"];
 					echo $callback . "(" . json_encode($response) . ")";
 					exit;

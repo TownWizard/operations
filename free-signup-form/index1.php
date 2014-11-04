@@ -185,6 +185,14 @@
 							$("#email").css('box-shadow','none');	
 							$("#gname").css('border','1px solid #CCCCCC');
 							$("#gname").css('box-shadow','none');									
+						}else if(data.status===200){
+							//console.log('else'); 
+							$("#simple-msg").html('You could not be registered due to a system error. We apologize for any inconvenience.');
+							$("#simple-msg").css('color','red');
+							$("#email").css('border','1px solid #CCCCCC');
+							$("#email").css('box-shadow','none');	
+							$("#gname").css('border','1px solid #CCCCCC');
+							$("#gname").css('box-shadow','none');									
 						}
                                                         
 						$('#contact').unbind('submit');
