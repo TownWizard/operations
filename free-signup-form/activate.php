@@ -160,14 +160,14 @@ if (isset($key)){
 		}
 
 	}else{
-		echo '<div class="errormsgbox">Guide has already been activated.</div>';
+		echo '<div class="errormsgbox">Record not found.</div>';
 	}	
 
 	$key="";
  	mysql_close($con);
 
 } else {
-	echo '<div class="errormsgbox">Error Occured .</div>';
+	echo '<div class="errormsgbox">Activation key is not proper .</div>';
 }
 
 ?>
