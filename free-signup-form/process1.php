@@ -43,7 +43,7 @@ if (!empty($_REQUEST['captcha'])) {
 		if(!$con2){die('Could not connect: ' . mysql_error($con2));}
 		$dblink2 = mysql_select_db("master");
 
-/*		$emailquery = "SELECT `id`,`guide_name`,`email`,`time`,`user_status` from user_signup WHERE `email`= '".$email."'  ";
+		$emailquery = "SELECT `id`,`guide_name`,`email`,`time`,`user_status` from user_signup WHERE `email`= '".$email."'  ";
 		$resultemail = mysql_query($emailquery);
 
 		if(mysql_num_rows($resultemail)>0){ 
@@ -51,20 +51,20 @@ if (!empty($_REQUEST['captcha'])) {
 			//echo "Found email";
 			$ctime = time();
 			while($data = mysql_fetch_assoc($resultemail)){
-				$calculateday = $ctime - $data['time'];
-				if($calculateday <= 86400 ){ 
+		//		$calculateday = $ctime - $data['time'];
+		//		if($calculateday <= 86400 ){ 
 					//echo "<br/>Email is registerd within 24 hour. So they can not submit new guide name.";
-					$response = array('status'=>102); 
-					$callback = $_GET["callback"];
-					echo $callback . "(" . json_encode($response) . ")";
-					exit;
-				}else{
+		//			$response = array('status'=>102); 
+		//			$callback = $_GET["callback"];
+		//			echo $callback . "(" . json_encode($response) . ")";
+		//			exit;
+		//		}else{
 					//echo "<br/>Email is registerd more than 24 hour So, Updating guide entry.";
 					updateProcess($data['id']);
-				}
+				/*}*/
 			}
 
-		}else{	*/
+		}else{	
 			//echo "Email id is not found So,Cheking guide name";
 			$ctime = time();
 			$guidesql = "SELECT `id`,`guide_name`,`email`,`time`,`user_status` from user_signup WHERE `guide_name`= '".$gname."' AND user_status='0' "; 
@@ -78,7 +78,7 @@ if (!empty($_REQUEST['captcha'])) {
 				//echo "<br/>We dont find email ID but guidename is there so cheking time.";
 				checkDataLoop($resultguidename);
 			}
-		/*}*/ 																																										
+		} 																																										
 	 }
   
 	$request_captcha = htmlspecialchars($_REQUEST['captcha']);
@@ -109,15 +109,15 @@ function insertProcess($data){
 				$var1 = "TownWizard Signup Email Verification";
 				$headercode = mailheader($var1);
 				$footercode = mailfooter();
-				$link = "http://".$_REQUEST['url']."/activate.php?key=" .$activation;
+				$link = $_REQUEST['url']."/activate.php?key=" .$activation;
 
 				$message .= $headercode; 
 				$message .= '<tr><td>&nbsp;</td><td><p style="font:22px Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:bold;margin:0px 0 0 0;padding:0;color:#000;">Congratulations</p><p style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:20px 0 5px 0;padding:0;">Thanks for signing up for your free local guide from TownWizard! Click the email verification link below to complete the guide setup process.</p></td><td>&nbsp;</td></tr>';
 				$message .= '<tr><td>&nbsp;</td><td style="text-align: center"><a href='.$link.' target="_blank" style="text-decoration: none; background: #e5292f; padding: 10px; margin: 10px 0px; color: rgb(255, 255, 255); border-radius: 5px; text-transform: capitalize; font: 20px/55px Helvetica Neue,Helvetica,Arial,sans-serif; box-shadow: 0px 1px 2px 2px rgba(0, 0, 0, 0.25);">click here </a></td><td>&nbsp;</td></tr>';
 				$message .= '<tr><td>&nbsp;</td><td><p style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">Once You click on above link, Your new local guide will ready! Check out the site link and login information below.</p></td><td>&nbsp;</td></tr>';	
 				$message .= '<tr><td height="100">&nbsp;</td><td> 
-					<table cellspacing="5"><tbody><tr><td width="180" style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">Guide Name : </td><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">'.$data['gname'].'</td></tr>
-					<tr><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;vertical-align: top;">Guide Administration URL : </td><td><a target="_blank" href="http://'.$data['gname'].'.townwizard.com/administrator" style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#1a1a1a;text-decoration:none;">http://'.$data['gname'].'.townwizard.com/administrator</a></td></tr>
+					<table cellspacing="5"><tbody><tr><td width="170" style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">Guide Name : </td><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">'.$data['gname'].'</td></tr>
+					<tr><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">Guide Administration URL : </td><td><a target="_blank" href="http://'.$data['gname'].'.townwizard.com/administrator" style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#1a1a1a;text-decoration:none;">http://'.$data['gname'].'.townwizard.com/administrator</a></td></tr>
 					<tr><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">Username : </td><td><a href="mailto:'.$data['email'].'" style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#1a1a1a;text-decoration:none;">'.$data['email'].'</a></td></tr>
 					<tr><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">Password : </td><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">(password that you specified)</td></tr></tbody></table>
 				</td><td>&nbsp;</td></tr>';
@@ -217,15 +217,29 @@ function updateProcess($did){
 				$headers .= "Content-type:text/html;charset=iso-8859-1\r\n";
 				$headers .= "From:TownWizard< no-reply@townwizard.com>";
 				
-			$updatemail = mail($email, 'TownWizard Signup Email Verification', $message, $headers);
-			if($updatemail){
+			//$updatemail = mail($email, 'TownWizard Signup Email Verification', $message, $headers);
+/*			if($updatemail){
 				//echo "<br/>Entry updated and mail sent.";
 				// Confirmation
 				$response=array('status'=>103);
 				$callback = $_GET["callback"];
 				echo $callback . "(" . json_encode($response) . ")";
 				exit;
-			}	
+			}*/	
+				$updatemail = sendTwMail($_REQUEST['email'],'TownWizard Signup Email Verification',$message,'operations@townwizard.com');
+				if($updatemail == 'SUCCEED'){
+					//echo "<br/>Entry Inserted and mail sent.";
+					$response	= array('status'=>103);
+					$callback	= $_GET["callback"];
+					echo $callback . "(" . json_encode($response) . ")";
+					exit;
+				}else{
+					//echo "<br/>Entry Inserted and mail not sent.";
+					$response	= array('status'=>200);
+					$callback	= $_GET["callback"];
+					echo $callback . "(" . json_encode($response) . ")";
+					exit;
+				}
 		}else{
 			//echo '<div class="errormsgbox">You could not be registered due to a system error. We apologize for any inconvenience.</div>';
 			$response=array('status'=>106);
