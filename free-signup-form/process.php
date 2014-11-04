@@ -61,7 +61,7 @@ function updateProcess($did){
 		$ip = $_SERVER['SERVER_ADDR'];
 		$time = time();
 		
-		$query_insert_user = "UPDATE `user_signup` SET `ip` = '$ip',`email` = '".$_REQUEST['email']."',`time` = '$time' WHERE `id` = $did ";
+		$query_insert_user = "UPDATE `user_signup` SET `ip` = '$ip',`email` = '".$_REQUEST['email']."',`time` = '$time',`guide_name` = '' WHERE `id` = $did ";
 		
 		$result_insert_user = mysql_query($query_insert_user);
 		
