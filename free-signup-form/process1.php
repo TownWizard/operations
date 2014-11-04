@@ -109,7 +109,7 @@ function insertProcess($data){
 				$var1 = "TownWizard Signup Email Verification";
 				$headercode = mailheader($var1);
 				$footercode = mailfooter();
-				$link = $_REQUEST['url']."/activate.php?key=" .$activation;
+				$link = "http://".$_REQUEST['url']."/activate.php?key=" .$activation;
 
 				$message .= $headercode; 
 				$message .= '<tr><td>&nbsp;</td><td><p style="font:22px Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:bold;margin:0px 0 0 0;padding:0;color:#000;">Congratulations</p><p style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:20px 0 5px 0;padding:0;">Thanks for signing up for your free local guide from TownWizard! Click the email verification link below to complete the guide setup process.</p></td><td>&nbsp;</td></tr>';
@@ -205,12 +205,19 @@ function updateProcess($did){
 				$var1 = "EMAIL VARIFICATION";
 				$headercode = mailheader($var1);
 				$footercode = mailfooter();
-				$link = $_REQUEST['url']."/activate.php?key=" .$activation;
+				$link = "http://".$_REQUEST['url']."/activate.php?key=" .$activation;
 
 				$message .= $headercode;
 				$message .= '<tr><td>&nbsp;</td><td><p style="font:22px Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:bold;margin:0px 0 0 0;padding:0;color:#000;">Congratulations</p><p style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:20px 0 5px 0;padding:0;">Thanks for signing up for your free local guide from TownWizard! Click the email verification link below to complete the guide setup process.</p></td><td>&nbsp;</td></tr>';
-				$message .= '<tr><td>&nbsp;</td><td style="text-align: center"><a href=http://'.$link.' target="_blank" style="text-decoration: none; background: #e5292f; padding: 10px; margin: 10px 0px; color: rgb(255, 255, 255); border-radius: 5px; text-transform: capitalize; font: 20px/55px Helvetica Neue,Helvetica,Arial,sans-serif; box-shadow: 0px 1px 2px 2px rgba(0, 0, 0, 0.25);">click here </a></td><td>&nbsp;</td></tr>';
-				$message .= '<tr><td height="100">&nbsp;</td><td><p style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:20px 0 5px 0;padding:0;">Sincerely,</p><p style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:20px 0 5px 0;padding:0;">The TownWizard Team</p></td><td>&nbsp;</td></tr>';								
+				$message .= '<tr><td>&nbsp;</td><td style="text-align: center"><a href='.$link.' target="_blank" style="text-decoration: none; background: #e5292f; padding: 10px; margin: 10px 0px; color: rgb(255, 255, 255); border-radius: 5px; text-transform: capitalize; font: 20px/55px Helvetica Neue,Helvetica,Arial,sans-serif; box-shadow: 0px 1px 2px 2px rgba(0, 0, 0, 0.25);">click here </a></td><td>&nbsp;</td></tr>';
+				$message .= '<tr><td>&nbsp;</td><td><p style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">Once You click on above link, Your new local guide will ready! Check out the site link and login information below.</p></td><td>&nbsp;</td></tr>';	
+				$message .= '<tr><td height="100">&nbsp;</td><td> 
+					<table cellspacing="5"><tbody><tr><td width="170" style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">Guide Name : </td><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">'.$_REQUEST['gname'].'</td></tr>
+					<tr><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">Guide Administration URL : </td><td><a target="_blank" href="http://'.$_REQUEST['gname'].'.townwizard.com/administrator" style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#1a1a1a;text-decoration:none;">http://'.$_REQUEST['gname'].'.townwizard.com/administrator</a></td></tr>
+					<tr><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">Username : </td><td><a href="mailto:'.$_REQUEST['email'].'" style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#1a1a1a;text-decoration:none;">'.$_REQUEST['email'].'</a></td></tr>
+					<tr><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">Password : </td><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">(password that you specified)</td></tr></tbody></table>
+				</td><td>&nbsp;</td></tr>';
+				$message .= '<tr><td height="100">&nbsp;</td><td><p style="font:15px Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:bold;margin:7px 0;color:#000000;">We are here to help.</p><p style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">You are invited to access TownWizard\'s Customer Self Service Portal. You can access the support site at <a target="_blank" href="http://www.townwizard.org/" style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#1a1a1a;text-decoration:none;">http://www.townwizard.org</a>.</p></td><td>&nbsp;</td></tr>';					$message .= '<tr><td>&nbsp;</td><td><p style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">Thank you,</p><p style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">The TownWizard Team</p></td><td>&nbsp;</td></tr>';		
 				$message .= $footercode;
 				
 				$headers = "MIME-Version: 1.0\r\n";
