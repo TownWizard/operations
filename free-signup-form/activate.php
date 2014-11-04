@@ -22,7 +22,7 @@
 </style>
 </head>
 <body>
-<div id="loading" style="margin: auto;width: 500px;"><img alt="loading" src="../gear.gif" style="width: 100%;"></div>
+
 
 <?php
 
@@ -52,6 +52,13 @@ if (isset($key)){
 
    // Print a customized message:
 	if($data['activation'] == TRUE){
+		
+		$ctime = time();
+		$calculateday = $ctime - $data['time'];
+			//Checking entries less that 24 hours
+		if($calculateday <= 86400){
+			
+			echo '<div id="loading" style="margin: auto;width: 500px;"><img alt="loading" src="../gear.gif" style="width: 100%;"></div>';
 
 		//calling of creating internal site
 
@@ -145,6 +152,11 @@ if (isset($key)){
 		}else{
 
 		 	echo '<div class="errormsgbox">You could not be registered due to a system error.</div>';
+		}
+		
+		}else{
+			echo '<div class="errormsgbox">Activation key is Expire.</div>';
+			exit;
 		}
 
 	}else{
