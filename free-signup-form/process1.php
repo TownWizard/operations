@@ -16,8 +16,9 @@ if (!empty($_REQUEST['captcha'])) {
 		
     } else {
 
-		$gname = strtolower($_REQUEST['gname']);
-		$email = $_REQUEST['email'];
+		$_REQUEST['gname'] = strtolower($_REQUEST['gname']);
+		$gname = $_REQUEST['gname'];
+                $email = $_REQUEST['email'];
 
 		//Master db cheking
 		$sitename = $gname.".townwizard.com";

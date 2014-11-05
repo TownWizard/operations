@@ -54,7 +54,7 @@ if (isset($key)){
 	if($data['activation'] == TRUE){
 		
 		//Guide Activate or not
-		if($data['user_status'] != '0'){
+		if($data['user_status'] == '0'){
 			
 			$ctime = time();
 			$calculateday = $ctime - $data['time'];
@@ -159,7 +159,7 @@ if (isset($key)){
 
 		}else{echo '<div class="errormsgbox">Guide already activated.</div>';}	
 		
-	}else{echo '<div class="errormsgbox">Record not found.</div>';}	
+	}else{echo '<div class="errormsgbox">Activation key is Expire.</div>';}	
 
 	$key="";
  	mysql_close($con);
