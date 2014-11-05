@@ -16,7 +16,7 @@ if (!empty($_REQUEST['captcha'])) {
 		
     } else {
 
-		$gname = $_REQUEST['gname'];
+		$gname = strtolower($_REQUEST['gname']);
 		$email = $_REQUEST['email'];
 
 		//Master db cheking
@@ -116,8 +116,8 @@ function insertProcess($data){
 				$message .= '<tr><td>&nbsp;</td><td style="text-align: center"><a href='.$link.' target="_blank" style="text-decoration: none; background: #e5292f; padding: 10px; margin: 10px 0px; color: rgb(255, 255, 255); border-radius: 5px; text-transform: capitalize; font: 20px/55px Helvetica Neue,Helvetica,Arial,sans-serif; box-shadow: 0px 1px 2px 2px rgba(0, 0, 0, 0.25);">click here </a></td><td>&nbsp;</td></tr>';
 				$message .= '<tr><td>&nbsp;</td><td><p style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">Once You click on above link, Your new local guide will ready! Check out the site link and login information below.</p></td><td>&nbsp;</td></tr>';	
 				$message .= '<tr><td height="100">&nbsp;</td><td> 
-					<table cellspacing="5"><tbody><tr><td width="170" style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">Guide Name : </td><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">'.$data['gname'].'</td></tr>
-					<tr><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">Guide Administration URL : </td><td><a target="_blank" href="http://'.$data['gname'].'.townwizard.com/administrator" style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#1a1a1a;text-decoration:none;">http://'.$data['gname'].'.townwizard.com/administrator</a></td></tr>
+					<table cellspacing="5"><tbody><tr><td width="180" style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">Guide Name : </td><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">'.$data['gname'].'</td></tr>
+					<tr><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;vertical-align: top;">Guide Administration URL : </td><td><a target="_blank" href="http://'.$data['gname'].'.townwizard.com/administrator" style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#1a1a1a;text-decoration:none;">http://'.$data['gname'].'.townwizard.com/administrator</a></td></tr>
 					<tr><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">Username : </td><td><a href="mailto:'.$data['email'].'" style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#1a1a1a;text-decoration:none;">'.$data['email'].'</a></td></tr>
 					<tr><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">Password : </td><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">(password that you specified)</td></tr></tbody></table>
 				</td><td>&nbsp;</td></tr>';
@@ -212,8 +212,8 @@ function updateProcess($did){
 				$message .= '<tr><td>&nbsp;</td><td style="text-align: center"><a href='.$link.' target="_blank" style="text-decoration: none; background: #e5292f; padding: 10px; margin: 10px 0px; color: rgb(255, 255, 255); border-radius: 5px; text-transform: capitalize; font: 20px/55px Helvetica Neue,Helvetica,Arial,sans-serif; box-shadow: 0px 1px 2px 2px rgba(0, 0, 0, 0.25);">click here </a></td><td>&nbsp;</td></tr>';
 				$message .= '<tr><td>&nbsp;</td><td><p style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">Once You click on above link, Your new local guide will ready! Check out the site link and login information below.</p></td><td>&nbsp;</td></tr>';	
 				$message .= '<tr><td height="100">&nbsp;</td><td> 
-					<table cellspacing="5"><tbody><tr><td width="170" style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">Guide Name : </td><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">'.$_REQUEST['gname'].'</td></tr>
-					<tr><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">Guide Administration URL : </td><td><a target="_blank" href="http://'.$_REQUEST['gname'].'.townwizard.com/administrator" style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#1a1a1a;text-decoration:none;">http://'.$_REQUEST['gname'].'.townwizard.com/administrator</a></td></tr>
+					<table cellspacing="5"><tbody><tr><td width="180" style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">Guide Name : </td><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">'.$_REQUEST['gname'].'</td></tr>
+					<tr><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;vertical-align: top;">Guide Administration URL : </td><td><a target="_blank" href="http://'.$_REQUEST['gname'].'.townwizard.com/administrator" style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#1a1a1a;text-decoration:none;">http://'.$_REQUEST['gname'].'.townwizard.com/administrator</a></td></tr>
 					<tr><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">Username : </td><td><a href="mailto:'.$_REQUEST['email'].'" style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#1a1a1a;text-decoration:none;">'.$_REQUEST['email'].'</a></td></tr>
 					<tr><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">Password : </td><td style="font:14px Helvetica Neue,Helvetica,Arial,sans-serif;color:#777777;margin:7px 0;padding:0;">(password that you specified)</td></tr></tbody></table>
 				</td><td>&nbsp;</td></tr>';
