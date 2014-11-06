@@ -6,7 +6,7 @@ function mailheader($var1){
 									<td>
 										<table width="650" border="0" align="center" cellpadding="0" cellspacing="0"><tbody>
 											<tr>
-												<td width="161"><a href="http://www.townwizard.com" target="_blank"><img src="http://www.townwizard.com/wp-content/themes/5506/images/2012/header/townwizard_logo.png" alt="townwizard" width="262" height="84" border="0"></a></td>
+												<td width="161"><a href="http://www.townwizard.com" target="_blank"><img src="http://www.townwizard.com/img/townwizard_logo.png" alt="townwizard" width="262" height="84" border="0"></a></td>
 												<td width="338" align="right"><p style="font:10px Helvetica Neue,Helvetica,Arial,sans-serif;letter-spacing:3px;margin:0;padding:0"><span style="color:#1a1a1a">'.$var1.'</span></p></td>
 											</tr>
 											<tr>
