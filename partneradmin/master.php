@@ -14,7 +14,7 @@ header('Location: index.php');
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <title>Upgrade Partner</title>
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> 
+        <script type="text/javascript" src="js/ajax.js"></script> 
         <script type="text/javascript">
             $(document).ready(function(){
                 function loading_show(){
