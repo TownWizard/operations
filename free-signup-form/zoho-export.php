@@ -9,8 +9,9 @@ $email			= 'yogi@yogiinfo.com';
 $subject		= 'Yogiinfo';
 $signupDate		= '12/9/2014'; // Format 8/8/2014
 $zipcode		= '77477';
-$contactName	= 'Yogi Ghorecha';*/
-
+$contactName	= 'Yogi Ghorecha';
+$guideInternalURL = $subject.'.townwizard.com';
+*/
 $accountName	= '<![CDATA['.$data['first_name'].' '.$data['last_name'].' %26 Co.]]>';
 $firstName		= $data['first_name'];
 $lastName		= $data['last_name'];
@@ -19,7 +20,7 @@ $subject		= $data['guide_name'];
 $signupDate		= date("m/d/Y", strtotime("now"));  // Format 8/8/2014
 $zipcode		= $data['zip'];
 $contactName	= $data['first_name']." ".$data['last_name'];
-
+$guideInternalURL = $data['guide_name'].'.townwizard.com';
 
 # ***** ACCOUNT MODULE ***** CURL Process
 setCurlParameter('Accounts'); // I created this function
@@ -28,9 +29,9 @@ $query = 'newFormat=2&authtoken=fd05fe57d221aba08aa657f9699fa0ce&scope=crmapi&xm
 curl_setopt($ch, CURLOPT_POSTFIELDS, $query);// Set the request as a POST FIELD for curl.
 $result = curl_exec($ch); // Execute cUrl session
 curl_close($ch);
-//echo "<b>New Partner Account Added!</b><br>";
-//echo $result;
-//echo "<br><br>";
+/*echo "<b>New Partner Account Added!</b><br>";
+echo $result;
+echo "<br><br>";*/
 # $partnerCreation will SET TRUE if data inserted successfully or FALSE if Failed to insert
 $partnerCreation = zohoInsertResponse($result);
 
@@ -48,9 +49,9 @@ $query = 'newFormat=2&authtoken=fd05fe57d221aba08aa657f9699fa0ce&scope=crmapi&xm
 curl_setopt($ch, CURLOPT_POSTFIELDS, $query);// Set the request as a POST FIELD for curl.
 $result = curl_exec($ch); //Execute cUrl session
 curl_close($ch);
-//echo "<b>New Contact Added!</b><br>";
-//echo $result;
-//echo "<br><br>";
+/*echo "<b>New Contact Added!</b><br>";
+echo $result;
+echo "<br><br>";*/
 # $contactCreation will SET TRUE if data inserted successfully or FALSE if Failed to insert
 $contactCreation = zohoInsertResponse($result);
 
@@ -66,6 +67,7 @@ $xml = '<SalesOrders><row no="1">
 <FL val="Guide City Zip">'.$zipcode.'</FL>
 <FL val="Contact Name">'.$contactName.'</FL>
 <FL val="Billing Status">Free</FL>
+<FL val="Guide URL Internal">'.$guideInternalURL.'</FL>
 <FL val="Product Details">
 <product no="1">
 <FL val="Product Id">760086000001604083</FL>
@@ -84,9 +86,9 @@ $query = 'newFormat=2&authtoken=fd05fe57d221aba08aa657f9699fa0ce&scope=crmapi&xm
 curl_setopt($ch, CURLOPT_POSTFIELDS, $query);// Set the request as a POST FIELD for curl.
 $result = curl_exec($ch); //Execute cUrl session
 curl_close($ch);
-//echo "<b>New Partner Guide Added!<br></b>";
-//echo $result;
-//echo "<br><br>";
+/*echo "<b>New Partner Guide Added!<br></b>";
+echo $result;
+echo "<br><br>";*/
 # $guideCreation will SET TRUE if data inserted successfully or FALSE if Failed to insert
 $guideCreation = zohoInsertResponse($result);
 
