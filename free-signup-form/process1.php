@@ -21,12 +21,21 @@ if (!empty($_REQUEST['captcha'])) {
                 $email = $_REQUEST['email'];
 
 		//Master db cheking
-		$sitename = $gname.".townwizard.com";
+		/*$sitename = $gname.".townwizard.com";
 		$con = mysql_connect("localhost","root","bitnami");
 		if(!$con){die('Could not connect: ' . mysql_error($con));}
 		$dblink = mysql_select_db("master");
 		$sql1="SELECT * from `master` WHERE `site_url` LIKE '%".$sitename."'";
+		$result1 = mysql_query($sql1);*/
+		
+		$int_sitename = $gname.".townwizard.com";
+		$ext_sitename = $gname.".com";
+		$con = mysql_connect("localhost","root","bitnami");
+		if(!$con){die('Could not connect: ' . mysql_error($con));}
+		$dblink = mysql_select_db("master");
+		$sql1="SELECT * from `master` WHERE `site_url` LIKE '%".$int_sitename."' OR `site_url` LIKE '%".$ext_sitename."'";
 		$result1 = mysql_query($sql1);
+		
 
 		if(mysql_num_rows($result1)>0){
 			//check for guide entry in master table
