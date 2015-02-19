@@ -127,8 +127,8 @@ global $msg;
 		return false;
 	}
 	
-	if(!ctype_alnum($postValue['guidezipcode'])){ 
-		$msg="Location code is not alphanumeric";
+	if(empty($postValue['guidezipcode'])){ 
+		$msg="Location code is empty";
 		return false;
 	}
 	
