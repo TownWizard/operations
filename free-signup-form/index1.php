@@ -36,23 +36,23 @@
 					var guidename = $("#gname").val();
 					var zip = $("#zip").val();
 					var emailid = this.email.value;	
-				
-					if(this.fname.value == "") {
-						alert("Please enter a valid first name. A-Z, a-z or 0-9 only."); 
+					var letters = /^[0-9a-zA-Z]+$/;
+					if(this.fname.value == "" || !(this.fname.value.match(letters))) {
+						alert("Please enter a valid first name. A-Z, a-z or 0-9 only.");
 						this.fname.focus();
 						$('#contact').unbind('submit');
 						 return false;
 					}
 
-					if(this.lname.value == "") {
-						alert("Please enter a valid last name. A-Z, a-z or 0-9 only."); 
+					if(this.lname.value == "" || !(this.lname.value.match(letters))) {
+						alert("Please enter a valid last name. A-Z, a-z or 0-9 only.");
 						this.lname.focus();
-						$('#contact').unbind('submit'); 
+						$('#contact').unbind('submit');
 						return false;
-					}		
-					
-					if(guidename == "") { 
-						alert("Guide Name required. Blank spaces not allowed."); 
+					}
+
+					if(guidename == "" || !(guidename.match(letters))) {
+						alert("Please enter a valid Guide name. A-Z, a-z or 0-9 only."); 
 						this.gname.focus();
 						$('#contact').unbind('submit'); 
 						return false;
@@ -80,8 +80,8 @@
 						}
 					}
 					
-					if(zip == "") { 
-						alert("zip required. Blank spaces not allowed."); 
+					if(zip == "" || !(zip.match(letters))) {
+						alert("Please enter a valid Zip code. A-Z, a-z or 0-9 only."); 
 						this.zip.focus();
 						$('#contact').unbind('submit'); 
 						return false;

@@ -212,7 +212,7 @@ function updateProcess($did){
 		//Successfully inserted into database
 		if($result_insert_user){
 			
-				$var1 = "EMAIL VARIFICATION";
+				$var1 = "EMAIL VERIFICATION";
 				$headercode = mailheader($var1);
 				$footercode = mailfooter();
 				$link = "http://".$_REQUEST['url']."/activate.php?key=" .$activation;
