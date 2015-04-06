@@ -13,12 +13,40 @@ if (!empty($_REQUEST['captcha'])) {
 		$callback = $_GET["callback"];
 		echo $callback . "(" . json_encode($response) . ")";
 		exit;
-		
-    } else {
-
+    }elseif($_REQUEST['fname'] == '' || validate_alphanumeric($_REQUEST['fname']) != TRUE ){
+		$response = array('status'=>108); 
+		$callback = $_GET["callback"];
+		echo $callback . "(" . json_encode($response) . ")";
+		exit;
+	}elseif($_REQUEST['lname'] == '' || validate_alphanumeric($_REQUEST['lname']) != TRUE ){
+		$response = array('status'=>109); 
+		$callback = $_GET["callback"];
+		echo $callback . "(" . json_encode($response) . ")";
+		exit;
+	}elseif($_REQUEST['gname'] == '' || validate_alphanumeric($_REQUEST['gname']) != TRUE ){
+		$response = array('status'=>110); 
+		$callback = $_GET["callback"];
+		echo $callback . "(" . json_encode($response) . ")";
+		exit;
+	}elseif($_REQUEST['email'] == '' || validate_email($_REQUEST['email']) != TRUE ){
+		$response = array('status'=>111); 
+		$callback = $_GET["callback"];
+		echo $callback . "(" . json_encode($response) . ")";
+		exit;
+	}elseif($_REQUEST['pass'] == '' || validate_password($_REQUEST['pass']) != TRUE ){
+		$response = array('status'=>112); 
+		$callback = $_GET["callback"];
+		echo $callback . "(" . json_encode($response) . ")";
+		exit;
+	}elseif($_REQUEST['zip'] == '' || validate_alphanumeric($_REQUEST['zip']) != TRUE ){
+		$response = array('status'=>113); 
+		$callback = $_GET["callback"];
+		echo $callback . "(" . json_encode($response) . ")";
+		exit;					
+    }else{
 		$_REQUEST['gname'] = strtolower($_REQUEST['gname']);
 		$gname = $_REQUEST['gname'];
-                $email = $_REQUEST['email'];
+        $email = $_REQUEST['email'];
 
 		//Master db cheking
 		/*$sitename = $gname.".townwizard.com";
@@ -264,5 +292,44 @@ function updateProcess($did){
 			echo $callback . "(" . json_encode($response) . ")";
 			exit;
 		}
-	}	 			
+	}
+/**
+* @Purpose: Validate Alphanumeric values in user signup form
+* @param undefined $str
+* Developer: Yogi 
+*/	
+function validate_alphanumeric($str) 
+{
+    return preg_match('/^[a-zA-Z0-9]+$/',$str);
+}
+
+/**
+* @Purpose: Validate Email Address values in user signup form
+* @param undefined $email
+* Developer: Yogi
+*/	
+function validate_email($email)
+{
+	if(!filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+		return TRUE;
+	}else{
+		return FALSE;
+	}
+}		 	
+
+/**
+* @Purpose: Validate Password length values in user signup form
+* @param  $password
+* Developer: Yogi
+*/	
+function validate_password($password)
+{
+	$password = trim($password); // Remove unwanted leading whitespace characters
+	if(strlen($password) >= 5 && strlen($password) <= 15){
+		return TRUE;
+	}else{
+		return FALSE;
+	}
+}	
+		
 ?> 

@@ -103,7 +103,7 @@
 						var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
 						if (filter.test(emailid)) {
 						}else {
-							alert("Valid email address required.."); 
+							alert("Valid email address required."); 
 							$('#contact').unbind('submit');
 							this.email.focus();
 							return false;
@@ -184,7 +184,55 @@
 							$("#email").css('border','1px solid #CCCCCC');
 							$("#email").css('box-shadow','none');	
 							$("#gname").css('border','1px solid #CCCCCC');
-							$("#gname").css('box-shadow','none');									
+							$("#gname").css('box-shadow','none');
+						}else if(data.status===108){ //First Name Serverside Validation
+							//console.log('else'); 
+							$("#simple-msg").html('Please enter a valid first name. A-Z, a-z or 0-9 only.');
+							$("#simple-msg").css('color','red');
+							$("#email").css('border','1px solid #CCCCCC');
+							$("#email").css('box-shadow','none');	
+							$("#gname").css('border','1px solid #CCCCCC');
+							$("#gname").css('box-shadow','none');
+						}else if(data.status===109){ //Last Name Serverside Validation
+							//console.log('else'); 
+							$("#simple-msg").html('Please enter a valid last name. A-Z, a-z or 0-9 only.');
+							$("#simple-msg").css('color','red');
+							$("#email").css('border','1px solid #CCCCCC');
+							$("#email").css('box-shadow','none');	
+							$("#gname").css('border','1px solid #CCCCCC');
+							$("#gname").css('box-shadow','none');
+						}else if(data.status===110){ //Guide Name Serverside Validation
+							//console.log('else'); 
+							$("#simple-msg").html('Please enter a valid Guide name. A-Z, a-z or 0-9 only.');
+							$("#simple-msg").css('color','red');
+							$("#email").css('border','1px solid #CCCCCC');
+							$("#email").css('box-shadow','none');	
+							$("#gname").css('border','1px solid #CCCCCC');
+							$("#gname").css('box-shadow','none');
+						}else if(data.status===111){ //Email Serverside Validation
+							//console.log('else'); 
+							$("#simple-msg").html('Valid email address required.');
+							$("#simple-msg").css('color','red');
+							$("#email").css('border','1px solid #CCCCCC');
+							$("#email").css('box-shadow','none');	
+							$("#gname").css('border','1px solid #CCCCCC');
+							$("#gname").css('box-shadow','none');
+						}else if(data.status===112){ //Password Serverside Validation
+							//console.log('else'); 
+							$("#simple-msg").html('Password required. It should be 5 to 15 charater long.');
+							$("#simple-msg").css('color','red');
+							$("#email").css('border','1px solid #CCCCCC');
+							$("#email").css('box-shadow','none');	
+							$("#gname").css('border','1px solid #CCCCCC');
+							$("#gname").css('box-shadow','none');		
+						}else if(data.status===113){ //Zipcode Serverside Validation
+							//console.log('else'); 
+							$("#simple-msg").html('Please enter a valid Zip code. A-Z, a-z or 0-9 only.');
+							$("#simple-msg").css('color','red');
+							$("#email").css('border','1px solid #CCCCCC');
+							$("#email").css('box-shadow','none');	
+							$("#gname").css('border','1px solid #CCCCCC');
+							$("#gname").css('box-shadow','none');													
 						}else if(data.status===200){
 							//console.log('else'); 
 							$("#simple-msg").html('You could not be registered due to a system error. We apologize for any inconvenience.');
