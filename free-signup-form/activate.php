@@ -130,7 +130,7 @@ if (isset($key)){
 					$message2.= "<tr><td><b>Contact Creation in ZOHO : </b></td><td>".$contactZohoStatus."</td></tr>";
 					$message2.= "<tr><td><b>Guide   Creation in ZOHO : </b></td><td>".$guideZohoStatus."</td></tr>";
 					# ZOHO STATUS MESSAGE END
-					$message2.= "<tr><td><b>Guide Administration URL : </b></td><td>http://".$data['guide_name'].".townwizard.com/administrator</td></tr></table>";
+					$message2.= "<tr><td><b>Guide Administration URL : </b></td><td>http://".$data['guide_name'].".townwizard.com/manage</td></tr></table>";
 
 					$headers2 = "MIME-Version: 1.0\r\n";
 					$headers2 .= "Content-type:text/html;charset=iso-8859-1\r\n";
@@ -147,7 +147,7 @@ if (isset($key)){
 				            $data[] = "";
 				         //   $serverurl = $_SERVER["HTTP_HOST"];
 
-							header('Location:http://'.$data['guide_name'].'.townwizard.com/administrator');
+							header('Location:http://'.$data['guide_name'].'.townwizard.com/manage');
 				      }else{
 				       echo '<div class="errormsgbox">You could not be registered due to error.Please contact at <b>support@townwizard.com</b></div><br/>';
 				      }
