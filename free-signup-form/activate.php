@@ -60,7 +60,7 @@ if (isset($key)){
 			$calculateday = $ctime - $data['time'];
 				
 			//Checking entries less that 24 hours
-			if($calculateday <= 86400){
+			if($calculateday <= (86400 * 14)){
 			
 				echo '<div id="loading" style="margin: auto;width: 500px;"><img alt="loading" src="../gear.gif" style="width: 100%;"></div>';
 
