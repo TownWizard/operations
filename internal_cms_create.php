@@ -214,7 +214,7 @@ function internalSiteCreationSteps()
 			{
 				// remove previous database backup of particular languge
 				// and then export database of particular language
-				if($_REQUEST[language] == 'english')
+				if($_REQUEST['language'] == 'english')
 				{
 					shell_exec('rm masterdefaultv3.sql');
 					$res = shell_exec('mysqldump -u root -pbitnami masterdefaultv3 > masterdefaultv3.sql');
@@ -224,8 +224,8 @@ function internalSiteCreationSteps()
 					//print_r($response);
 					
 				}else{
-					shell_exec('rm masterdefault'.strtolower($_REQUEST[language]).'v3.sql');
-					shell_exec('mysqldump -u root -pbitnami masterdefault'.strtolower($_REQUEST[language]).'v3 > masterdefault'.strtolower($_REQUEST[language]).'v3.sql');  
+					shell_exec('rm masterdefault'.strtolower($_REQUEST['language']).'v3.sql');
+					shell_exec('mysqldump -u root -pbitnami masterdefault'.strtolower($_REQUEST['language']).'v3 > masterdefault'.strtolower($_REQUEST['language']).'v3.sql');  
 				}
 				
 			}
@@ -239,11 +239,11 @@ function internalSiteCreationSteps()
 			
 			global $msg,$twwebroot;
 			//copy masterdefaultv3 images to new partner
-			shell_exec('cp -r '.$twwebroot.'/v3/partner/masterdefaultv3 '.$twwebroot.'/v3/partner/'.$_REQUEST[guideinternalurl].'');
+			shell_exec('cp -r '.$twwebroot.'/v3/partner/masterdefaultv3 '.$twwebroot.'/v3/partner/'.$_REQUEST['guideinternalurl'].'');
 			
 			
 			// Changing directory to images/phocagallery
-			if(chdir(''.$twwebroot.'/v3/partner/'.$_REQUEST[guideinternalurl].'/images/phocagallery'))
+			if(chdir(''.$twwebroot.'/v3/partner/'.$_REQUEST['guideinternalurl'].'/images/phocagallery'))
 			{
 				shell_exec('rm .htaccess');
 			
@@ -403,16 +403,16 @@ function databaseInsertsteps(){
 	}
 						       
 	//Import database into partner's database
-	if($_REQUEST[language] == 'english')
+	if($_REQUEST['language'] == 'english')
 	{
 		shell_exec('mysql -u root -pbitnami '.$new_db_name.' < masterdefaultv3.sql');  
 	}
 	else{
-		shell_exec('mysql -u root -pbitnami '.$new_db_name.' < masterdefault'.strtolower($_REQUEST[language]).'v3.sql');  
+		shell_exec('mysql -u root -pbitnami '.$new_db_name.' < masterdefault'.strtolower($_REQUEST['language']).'v3.sql');  
 	}
 				
 	//updating page global table
-	$query_output1 = mysql_query("UPDATE jos_pageglobal SET site_name ='".ucfirst($_REQUEST[guideinternalurl])."', email ='".$_REQUEST[email]."', googgle_map_api_keys ='', location_code ='".$_REQUEST[guidezipcode]."', beach ='".ucfirst($_REQUEST[guideinternalurl])."', photo_mini_slider_cat ='Events', photo_upload_cat ='Events', facebook ='', iphone ='http://itunes.apple.com/us/app/townwizard/id507216232?mt=8&uo=4', android ='', Header_color='#00BAE8', distance_unit ='".$_REQUEST[dunit]."', weather_unit ='".$_REQUEST[wunit]."', twitter ='',date_format ='".$_REQUEST[dformat]."',time_format ='".$_REQUEST[tformat]."', youtube ='',time_zone ='".$_REQUEST[timezone]."' WHERE id='1'");	
+	$query_output1 = mysql_query("UPDATE jos_pageglobal SET site_name ='".ucfirst($_REQUEST['guideinternalurl'])."', email ='".$_REQUEST['email']."', googgle_map_api_keys ='', location_code ='".$_REQUEST['guidezipcode']."', beach ='".ucfirst($_REQUEST['guideinternalurl'])."', photo_mini_slider_cat ='Events', photo_upload_cat ='Events', facebook ='', iphone ='http://itunes.apple.com/us/app/townwizard/id507216232?mt=8&uo=4', android ='', Header_color='#00BAE8', distance_unit ='".$_REQUEST['dunit']."', weather_unit ='".$_REQUEST['wunit']."', twitter ='',date_format ='".$_REQUEST['dformat']."',time_format ='".$_REQUEST['tformat']."', youtube ='',time_zone ='".$_REQUEST['timezone']."' WHERE id='1'");	
 		
 	if (!$query_output1){
 		$msg="Could not update jos_pageglobal table of database `".$new_db_name."`";
@@ -427,9 +427,9 @@ function databaseInsertsteps(){
 				phocauser=65 
 				todayarticle= 
 				aboutarticle=
-				townname=".ucfirst($_REQUEST[guideinternalurl])." 
-				zip=".$_REQUEST[guidezipcode]." 
-				email=".$_REQUEST[email]."' 
+				townname=".ucfirst($_REQUEST['guideinternalurl'])." 
+				zip=".$_REQUEST['guidezipcode']." 
+				email=".$_REQUEST['email']."' 
 				WHERE `jos_components`.`id` =41");
 
 	if (!$query_output2){
@@ -440,7 +440,7 @@ function databaseInsertsteps(){
 	}
 	
 	//calling for function for getting longitude and latitude
-	$val = getLnt($_REQUEST[guidezipcode]);
+	$val = getLnt($_REQUEST['guidezipcode']);
 		 	
 	//updating jevlocation parameters
 	$query_output3 = mysql_query("UPDATE jos_components SET `params` = 'loc_own=19
@@ -514,8 +514,8 @@ function databaseInsertsteps(){
 	//Changing partner folder name for media manager
 	$query_output4 = mysql_query("UPDATE jos_components SET `params`= 'upload_extensions=bmp,csv,doc,epg,gif,ico,jpg,odg,odp,ods,odt,pdf,png,ppt,swf,txt,xcf,xls,BMP,CSV,DOC,EPG,GIF,ICO,JPG,ODG,ODP,ODS,ODT,PDF,PNG,PPT,SWF,TXT,XCF,XLS,zip
 				upload_maxsize=10000000
-				file_path=partner/".$_REQUEST[guideinternalurl]."/images
-				image_path=partner/".$_REQUEST[guideinternalurl]."/images/stories
+				file_path=partner/".$_REQUEST['guideinternalurl']."/images
+				image_path=partner/".$_REQUEST['guideinternalurl']."/images/stories
 				restrict_uploads=1
 				allowed_media_usergroup=3
 				check_mime=1
@@ -534,7 +534,7 @@ function databaseInsertsteps(){
 	}
 	
 	//Updating rsform table for changing email id
-	$query_output5 = mysql_query("UPDATE jos_rsform_forms SET AdminEmailTo='".$_REQUEST[email]."'");
+	$query_output5 = mysql_query("UPDATE jos_rsform_forms SET AdminEmailTo='".$_REQUEST['email']."'");
 
 
 	if (!$query_output5){
@@ -567,7 +567,7 @@ function databaseInsertsteps(){
 				editor_theme_advanced_fonts_add=
 				editor_theme_advanced_fonts_remove=
 				editor_theme_advanced_font_sizes=8pt,10pt,12pt,14pt,18pt,24pt,36pt
-				editor_dir=partner/".$_REQUEST[guideinternalurl]."/images/stories
+				editor_dir=partner/".$_REQUEST['guideinternalurl']."/images/stories
 				editor_max_size=1024
 				editor_upload_conflict=
 				editor_preview_height=550
@@ -620,9 +620,9 @@ function databaseInsertsteps(){
         //Updating email and pass for admin user
         if(isset($_REQUEST['password']) AND $_REQUEST['password']!=''){
             $password = $_REQUEST['password'];
-            $query_output7 = mysql_query("UPDATE jos_users SET `username` = '".$_REQUEST[email]."',email='".$_REQUEST[email]."',password='".md5($password)."' WHERE id=62");
+            $query_output7 = mysql_query("UPDATE jos_users SET `username` = '".$_REQUEST['email']."',email='".$_REQUEST['email']."',password='".md5($password)."' WHERE id=62");
         }else{
-            $query_output7 = mysql_query("UPDATE jos_users SET `username` = '".$_REQUEST[email]."',email='".$_REQUEST[email]."',password='".md5($_REQUEST[guideinternalurl].'123')."' WHERE id=62");
+            $query_output7 = mysql_query("UPDATE jos_users SET `username` = '".$_REQUEST['email']."',email='".$_REQUEST['email']."',password='".md5($_REQUEST['guideinternalurl'].'123')."' WHERE id=62");
         }
         
 	if (!$query_output7){
@@ -643,12 +643,12 @@ function databaseInsertsteps(){
 	}
 
 	//Insert new partner in our master table
-	if($_REQUEST[language] == 'english')
+	if($_REQUEST['language'] == 'english')
 	{
 		if($_REQUEST['id']=='2'){
-			$insert_for_eng = mysql_query("insert into master(mid,site_url,db_name,db_user,db_password,tpl_folder_name,partner_type,style_folder_name,partner_folder_name) values('','".$_REQUEST[guideinternalurl].".townwizard.com','".$new_db_name."','root','bitnami','default','free','v3','".$_REQUEST[guideinternalurl]."')");
+			$insert_for_eng = mysql_query("insert into master(mid,site_url,db_name,db_user,db_password,tpl_folder_name,partner_type,style_folder_name,partner_folder_name) values('','".$_REQUEST['guideinternalurl'].".townwizard.com','".$new_db_name."','root','bitnami','default','free','v3','".$_REQUEST['guideinternalurl']."')");
 		}else{
-			$insert_for_eng = mysql_query("insert into master(mid,site_url,db_name,db_user,db_password,tpl_folder_name,partner_type,style_folder_name,partner_folder_name) values('','".$_REQUEST[guideinternalurl].".townwizard.com','".$new_db_name."','root','bitnami','default','paid','v3','".$_REQUEST[guideinternalurl]."')");
+			$insert_for_eng = mysql_query("insert into master(mid,site_url,db_name,db_user,db_password,tpl_folder_name,partner_type,style_folder_name,partner_folder_name) values('','".$_REQUEST['guideinternalurl'].".townwizard.com','".$new_db_name."','root','bitnami','default','paid','v3','".$_REQUEST['guideinternalurl']."')");
 		}
 		if (!$insert_for_eng){
 			$msg="Could not insert into master table";
@@ -660,9 +660,9 @@ function databaseInsertsteps(){
 	}
 	else{
 		if($_REQUEST['id']=='2'){
-			$insert_for_other = mysql_query("insert into master(mid,site_url,db_name,db_user,db_password,tpl_folder_name,partner_type,style_folder_name,partner_folder_name) values('','".$_REQUEST[guideinternalurl].".townwizard.com','".$new_db_name."','root','bitnami','default','free','v3','".$_REQUEST[guideinternalurl]."')");
+			$insert_for_other = mysql_query("insert into master(mid,site_url,db_name,db_user,db_password,tpl_folder_name,partner_type,style_folder_name,partner_folder_name) values('','".$_REQUEST['guideinternalurl'].".townwizard.com','".$new_db_name."','root','bitnami','default','free','v3','".$_REQUEST['guideinternalurl']."')");
 		}else{
-			$insert_for_other = mysql_query("insert into master(mid,site_url,db_name,db_user,db_password,tpl_folder_name,partner_type,style_folder_name,partner_folder_name) values('','".$_REQUEST[guideinternalurl].".townwizard.com','".$new_db_name."','root','bitnami','default','paid','v3','".$_REQUEST[guideinternalurl]."')");
+			$insert_for_other = mysql_query("insert into master(mid,site_url,db_name,db_user,db_password,tpl_folder_name,partner_type,style_folder_name,partner_folder_name) values('','".$_REQUEST['guideinternalurl'].".townwizard.com','".$new_db_name."','root','bitnami','default','paid','v3','".$_REQUEST['guideinternalurl']."')");
 		}
 		if (!$insert_for_other){
 			$msg="Could not insert into master table";
